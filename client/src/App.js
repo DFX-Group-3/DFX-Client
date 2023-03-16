@@ -1,12 +1,12 @@
 import './App.css';
-import Header from './Components/Header';
+import HeaderForm from './Components/HeaderForm';
 
 function App() {
 
 
   return (
     <>
-      <Header />
+      <HeaderForm />
     </>
   );
 }
