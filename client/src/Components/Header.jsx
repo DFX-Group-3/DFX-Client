@@ -1,4 +1,25 @@
 const Header = () => {
+
+
+    // use state
+    const [person, setPerson] = useState([]);
+
+
+    const uri = `http://localhost:4000/person`
+
+    const getPerson = async () => {
+        // 
+        const response = await axios.get(uri)
+        setPerson(response)
+        console.log(response);
+    }
+
+    console.log(getPerson);
+
+
+
+
+
     return (
         <>
             <div className="links">
