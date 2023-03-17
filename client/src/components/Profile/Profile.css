@@ -1,13 +1,23 @@
 *{
-    overflow-x: hidden;
+    overflow-x: none;
+    
+}
+h2{
+    font-size: 1.75em;
+}
+
+.div-container{
+max-width: 90%;
+margin:0 auto;
 }
 .profile-div{
         position: relative;
         display: block;
-        max-width: 1200px;
+        max-width: 100%;
         height: 500px;
         background-color: antiquewhite;
-        margin: 0 auto;   
+        margin: 0 auto;
+        border-radius: 10px;   
 }
 img {
     border-radius: 50%;
@@ -28,29 +38,32 @@ img {
     position: relative;
     max-width: 300px;
     display: grid;
-    padding-bottom: 10px;
-    padding-right: 40px;
-    padding-top: 20px;
+    padding:20px 40px 10px 60px;
+   
     }
 .nationality{
     width:50px;
     height:30px;
     position: absolute;
     border-radius: 0;
-    margin-left: 74px;
+    margin-left: 135px;
     bottom:0;
     margin-top:10px;
     
 }
 .overview{
+
     width:100%;
-    padding-left:30px;
+    padding-left:325px;
     text-align: left;
+    max-width:900px;
+    
 }
+
 
 .prof-buttons{
     display: flex;
-    padding: 20px 0 50px 0;
+    padding: 20px 0 50px 60px;
 }
 .prof-buttons>button{
         padding: 11px;
@@ -58,9 +71,10 @@ img {
         border-radius: 25px;
 }
 
-
-#overview{
-        width: 100%;
-            padding-left: 232px;
-            text-align: left;
+.experience-div>.col-2{
+    display:inline;
+}
+.certification-div{
+    display:flex;
+    
 }

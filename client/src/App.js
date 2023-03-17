@@ -1,7 +1,7 @@
 import "./App.css";
-import Profile from "./components/Profile/Profile";
-import HeaderForm from './Components/HeaderForm';
-import { useState } from "react";
+import Profile from "./Components/Profile/Profile";
+import HeaderForm from "./Components/HeaderForm";
+import { useState, useEffect } from "react";
 import classNames from "classnames";
 
 function App() {
@@ -18,11 +18,11 @@ function App() {
           "dark-mode": mode === "dark",
         })}
       >
-        <Profile />
-        <HeaderForm />
+        {/*<HeaderForm />*/}
 
         <button onClick={toggleMode}>Toggle Mode</button>
       </div>
+      <Profile />
     </>
   );
 }
