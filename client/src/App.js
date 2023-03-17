@@ -1,8 +1,9 @@
 import "./App.css";
-import Profile from "./components/Profile/Profile";
-import HeaderForm from './Components/HeaderForm';
+//import Profile from "./Components/Profile/Profile";
+import HeaderForm from './Components/HeaderForm/HeaderForm';
 import { useState } from "react";
-import classNames from "classnames";
+import axios from "axios";
+//import classNames from "classnames";
 
 function App() {
   const [mode, setMode] = useState("day");
@@ -10,19 +11,41 @@ function App() {
   function toggleMode() {
     setMode(mode == "day" ? "dark" : "day");
   }
+
+  const addPerson = async person => {
+
+    const result = sendPersonData(person);
+
+    if (!result?.error) {
+      console.log(`Person added!`);
+    }
+    if (result?.error) console.log(`An error occured while adding person data`);
+  }
+
+  const sendPersonData = async person => {
+    try {
+      const responseData = await axios.post(`http://localhost:4000/person`, person);
+      return responseData.data;
+    }
+    catch (e) {
+      return { error: `Error` };
+    }
+  }
+
   return (
     <>
-      <div
-        className={classNames({
-          "day-mode": mode === "day",
-          "dark-mode": mode === "dark",
-        })}
+      {/* <div
+      className={classNames({
+        "day-mode": mode === "day",
+        "dark-mode": mode === "dark",
+      })}
       >
         <Profile />
-        <HeaderForm />
 
         <button onClick={toggleMode}>Toggle Mode</button>
-      </div>
+      </div> */}
+
+      <HeaderForm addPerson={addPerson} />
     </>
   );
 }
