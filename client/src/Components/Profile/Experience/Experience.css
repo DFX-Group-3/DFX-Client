@@ -1,0 +1,14 @@
+.title-bts{
+    display: flex;
+}
+.buttons{
+    margin: 0 0 0 auto;
+    
+}
+.buttons>button{
+    border: none;
+    background-color: transparent;
+}
+button>img{
+    width:25px;
+}

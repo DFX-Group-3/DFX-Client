@@ -1,0 +1,76 @@
+h2 {
+    font-size: 1.75em;
+}
+
+.border-col {
+    border: 1px solid grey;
+    border-radius: 15px;
+
+}
+.profile-div {
+    position: relative;
+    display: block;
+    max-width: 100%;
+    height: 500px;
+    background-color: antiquewhite;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.prof-pic>img {
+    border-radius: 50%;
+    border: 1px solid rgb(62, 184, 255);
+}
+
+.profile-background-pic {
+    height: 200px;
+    width: 100%;
+    border-radius: 0;
+}
+
+.profile-section {
+    position: absolute;
+    top: 100px;
+
+}
+
+.prof-pic {
+
+    position: relative;
+    max-width: 300px;
+    display: grid;
+    padding: 20px 40px 10px 60px;
+
+}
+
+.nationality {
+    width: 50px;
+    height: 30px;
+    position: absolute;
+    border-radius: 0;
+    margin-left: 135px;
+    bottom: 0;
+    margin-top: 10px;
+
+}
+
+.overview {
+
+    width: 100%;
+    padding-left: 325px;
+    text-align: left;
+    max-width: 900px;
+
+}
+
+
+.prof-buttons {
+    display: flex;
+    padding: 20px 0 50px 60px;
+}
+
+.prof-buttons>button {
+    padding: 11px;
+    margin: 15px;
+    border-radius: 25px;
+}

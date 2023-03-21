@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Profile.css"
-import axios from "axios"
 import { retrieveUser } from "../../Utils/GetDetails";
+import ProfileOverview from './ProfileOverview/ProfileOverview';
+import Experience from './Experience/Experience';
+import Portfolio from './Portfolio/Portfolio';
+import Certification from './Certification/Certification';
 export default function Profile() {
 
     
@@ -20,51 +23,24 @@ export default function Profile() {
   return (
     <>
       <div className='div-container'>
-          <div className='profile-div'>
-              <div className='top-img'>
-                  <img className='profile-background-pic' src='https://picsum.photos/1200/200'></img>
-                  </div>
-              <section className='profile-section'>
-                <div className='prof-pic'>
-                      <img src="https://picsum.photos/200/200" />
-                      <img className="nationality" src="https://picsum.photos/60/40"/>
-                    </div>
-                    <div className='prof-buttons'>
-                    <button className="fa fa-github">Github</button>
-                        <button className="fa fa-linkedin">LinkedIn</button> 
-                    </div>
-                </section>
-        <div className='overview'>
-                  <h2>{details.first_name +" "+details.last_name}</h2>
-                  <h3>{ details.tagline}</h3>
-                  <p>{ details.profile_headline}</p>
+        <ProfileOverview details={ details } />
+        <div className="row gx-1 container-row">
+          {/**Column for the left side (portfolio, experience etc) */}
+          <div className="col-8 ">
+            {/**That is 1 part (experience) until the next comment */}
+            <Experience/>
+            {/**Next part starts here */}
+            <Portfolio/>     
+          </div>
+          {/**The column for the right side(qualification, certification etc) */}
+          <div className="col-3 r-col">
+            {/**Certification part of right column */}
+            <Certification/>
+          
+          </div>
         </div>
-    </div>
-      <div className="container">
-  <div className="row">
-    <div className="col-8">
-              
-                <h2>Experience</h2>
-                <h3>View the experience of the engineer</h3>
-              <div className="row">
-                <div class="col-3">ORGANIZATION</div>
-                <div class="col-2">POSITION</div>
-                <div class="col-3">DATES</div>
-                
-
-
-
-  
-                </div>
-              </div>   
-    <div className="col-4 certification-div">
-          <h2>Certification</h2>
-          <a href='/'><img src='https://picsum.photos/5/10'/></a>
-          <a href='/'><img src='https://picsum.photos/5/10'/></a>
-    </div>
-  </div>
 </div>
-</div>
+
     </>
   )
 }
