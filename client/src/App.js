@@ -1,8 +1,9 @@
 import "./App.css";
 //import Profile from "./Components/Profile/Profile";
-import HeaderForm from './Components/HeaderForm/HeaderForm';
+import HeaderAddForm from './Components/HeaderAddForm/HeaderAddForm';
 import { useState } from "react";
 import axios from "axios";
+import HeaderEditForm from "./Components/HeaderEditForm/HeaderEditForm";
 //import classNames from "classnames";
 
 function App() {
@@ -20,6 +21,16 @@ function App() {
       console.log(`Person added!`);
     }
     if (result?.error) console.log(`An error occured while adding person data`);
+  }
+
+  const editPerson = async person => {
+    try {
+      const responseData = await axios.put(`http://localhost:4000/person`, person);
+      return responseData.data;
+    }
+    catch (e) {
+      return { error: `Error` };
+    }
   }
 
   const sendPersonData = async person => {
@@ -45,7 +56,8 @@ function App() {
         <button onClick={toggleMode}>Toggle Mode</button>
       </div> */}
 
-      <HeaderForm addPerson={addPerson} />
+      {/* <HeaderAddForm addPerson={addPerson} /> */}
+      <HeaderEditForm editPerson={editPerson} />
     </>
   );
 }
