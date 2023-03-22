@@ -25,7 +25,7 @@ function App() {
 
   const editPerson = async person => {
     try {
-      const responseData = await axios.put(`http://localhost:4000/person`, person);
+      const responseData = await axios.put(`http://localhost:4000/person/${12}`, person);
       return responseData.data;
     }
     catch (e) {
