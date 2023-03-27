@@ -15,7 +15,7 @@ const Header = () => {
         github_url: '',
         youtube_url: '',
         profile_headline: '',
-        nationality: ''
+        nationality: 'england'
     });
 
     const addPerson = async person => {
@@ -49,12 +49,11 @@ const Header = () => {
             if (key === 'nationality') {
                 return <Form.Group key={key}>
                     <label htmlFor="nationality">Nationality:</label><br />
-
-                    <select name="nationality" id="nationality" form="" value={person.nationality} onChange={handleChange}>
+                    <select id="nationality" name="nationality" defaultValue={person.nationality} onChange={handleChange}>
                         <option value="england" >England</option>
                         <option value="scotland">Scotland</option>
                         <option value="wales">Wales</option>
-                    </select><br />
+                    </select>
                 </Form.Group>
             } else if (key === 'profile_headline') {
                 return <Form.Group key={key}>
