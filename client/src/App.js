@@ -13,29 +13,19 @@ function App() {
     setMode(mode == "day" ? "dark" : "day");
   }
 
-  const addPerson = async person => {
+  // const addPerson = async person => {
 
-    const result = sendPersonData(person);
+  //   const result = sendPersonData(person);
 
-    if (!result?.error) {
-      console.log(`Person added!`);
-    }
-    if (result?.error) console.log(`An error occured while adding person data`);
-  }
+  //   if (!result?.error) {
+  //     console.log(`Person added!`);
+  //   }
+  //   if (result?.error) console.log(`An error occured while adding person data`);
+  // }
 
   const editPerson = async person => {
     try {
       const responseData = await axios.put(`http://localhost:4000/person`, person);
-      return responseData.data;
-    }
-    catch (e) {
-      return { error: `Error` };
-    }
-  }
-
-  const sendPersonData = async person => {
-    try {
-      const responseData = await axios.post(`http://localhost:4000/person`, person);
       return responseData.data;
     }
     catch (e) {
@@ -56,8 +46,8 @@ function App() {
         <button onClick={toggleMode}>Toggle Mode</button>
       </div> */}
 
-      {/* <HeaderAddForm addPerson={addPerson} /> */}
-      <HeaderEditForm editPerson={editPerson} />
+      <HeaderAddForm />
+      {/* <HeaderEditForm /> */}
     </>
   );
 }

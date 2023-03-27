@@ -1,7 +1,9 @@
-// import axios from 'axios';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Header = ({ addPerson }) => {
+const Header = () => {
 
     // all in 1
     const [person, setPerson] = useState({
@@ -16,12 +18,22 @@ const Header = ({ addPerson }) => {
         nationality: ''
     });
 
+    const addPerson = async person => {
+        try {
+            const responseData = await axios.post(`http://localhost:4000/person`, person);
+            return responseData.data;
+        }
+        catch (e) {
+            return { error: `Error` };
+        }
+    }
+
     function handleChange(e) {
         setPerson({
             ...person,
             [e.target.name]: e.target.value
         });
-        console.log(person)
+        console.log(person);
     }
 
     // handle form data when being submit
@@ -30,44 +42,52 @@ const Header = ({ addPerson }) => {
         addPerson(person);
     }
 
+    const formFields = () => {
+        return Object.keys(person).map(key => {
+            if (key === 'nationality') {
+                return <Form.Group key={key}>
+                    <label htmlFor="nationality">Nationality:</label><br />
+                    <select name="nationality" id="nationality" form="" value={person.nationality} onChange={handleChange}>
+                        <option value="england" >England</option>
+                        <option value="scotland">Scotland</option>
+                        <option value="wales">Wales</option>
+                    </select><br />
+                </Form.Group>
+            } else if (key === 'profile_headline') {
+                return <Form.Group key={key}>
+                    <label htmlFor="profile_headline">Headline:</label><br />
+                    <textarea type="text" id="profile_headline" name="profile_headline" rows="4" cols="50" value={person.profile_headline} onChange={handleChange} /><br />
+                </Form.Group>
+            }
+
+            return <Form.Group key={key}>
+                <Form.Label>{key}</Form.Label>
+                <Form.Control
+                    id={key}
+                    name={key}
+                    text='text'
+                    placeholder={key}
+                    value={person[key]}
+                    onChange={handleChange}
+                />
+            </Form.Group>
+        });
+    }
+
     return (
         <>
             <h3>Adding</h3>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="first_name">First name:</label><br />
-                <input type="text" id="first_name" name="first_name" value={person.first_name} onChange={handleChange} /><br />
 
-                <label htmlFor="last_name">Last name:</label><br />
-                <input type="text" id="last_name" name="last_name" value={person.last_name} onChange={handleChange} /><br />
+            <Form onSubmit={e => handleSubmit(e)}>
 
-                <label htmlFor="gender">Gender:</label><br />
-                <input type="text" id="gender" name="gender" value={person.gender} onChange={handleChange} /><br />
+                {formFields()}
 
-                <label htmlFor="tagline">Tagline:</label><br />
-                <input type="text" id="tagline" name="tagline" value={person.tagline} onChange={handleChange} /><br />
-
-                <label htmlFor="linkedin_url">LinkedIn:</label><br />
-                <input type="text" id="linkedin_url" name="linkedin_url" value={person.linkedin_url} onChange={handleChange} /><br />
-
-                <label htmlFor="github_url">Github:</label><br />
-                <input type="text" id="github_url" name="github_url" value={person.github_url} onChange={handleChange} /><br />
-
-                <label htmlFor="youtube_url">Youtube:</label><br />
-                <input type="text" id="youtube_url" name="youtube_url" value={person.youtube_url} onChange={handleChange} /><br />
-
-                <label htmlFor="profile_headline">Headline:</label><br />
-                <textarea type="text" id="profile_headline" name="profile_headline" rows="4" cols="50" value={person.profile_headline} onChange={handleChange} /><br />
-
-                <label htmlFor="nationality">Nationality:</label><br />
-                <select name="nationality" id="nationality" form="" value={person.nationality} onChange={handleChange}>
-                    {/* need to do default value */}
-                    <option value="england" >England</option>
-                    <option value="scotland">Scotland</option>
-                    <option value="wales">Wales</option>
-                </select><br />
-
-                <input type="submit" value="Submit" />
-            </form>
+                <Button
+                    variant='primary'
+                    type='submit'
+                    onClick={e => handleSubmit(e)}
+                >Submit</Button>
+            </Form>
         </>
 
     );
