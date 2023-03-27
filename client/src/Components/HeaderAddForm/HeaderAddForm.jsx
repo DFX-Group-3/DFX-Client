@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Select from 'react-select'
 
 const Header = () => {
 
@@ -43,43 +42,19 @@ const Header = () => {
         addPerson(person);
     }
 
-    // for nationality
-    const options = [
-        { value: 'england', label: 'england' },
-        { value: 'scotland', label: 'scotland' },
-        { value: 'wales', label: 'wales' }
-    ]
-
-    const onSelectDataChange = (option, e) => {
-        console.dir(option)
-        console.dir(e)
-        setPerson({
-            ...person,
-            [e.name]: option.value
-        });
-
-    }
 
     const formFields = () => {
         return Object.keys(person).map(key => {
-
-
 
             if (key === 'nationality') {
                 return <Form.Group key={key}>
                     <label htmlFor="nationality">Nationality:</label><br />
 
-                    {/* <select name="nationality" id="nationality" form="" value={person.nationality} onChange={handleChange}>
+                    <select name="nationality" id="nationality" form="" value={person.nationality} onChange={handleChange}>
                         <option value="england" >England</option>
                         <option value="scotland">Scotland</option>
                         <option value="wales">Wales</option>
-                    </select><br /> */}
-
-                    <Select options={options} name="nationality" id="nationality" form="" value={person.nationality} onChange={onSelectDataChange} />
-
-
-
-
+                    </select><br />
                 </Form.Group>
             } else if (key === 'profile_headline') {
                 return <Form.Group key={key}>
