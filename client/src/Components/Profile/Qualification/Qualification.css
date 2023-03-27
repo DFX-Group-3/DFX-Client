@@ -1,0 +1,41 @@
+.title-bts{
+    display: flex;
+    align-items: center;
+}
+.buttons{
+    margin: 0 0 0 auto;
+    
+}
+.buttons>button{
+    border: none;
+    background-color: transparent;
+}
+button>img{
+    width:25px;
+}
+.col-md-4{
+    display:flex;
+    border-bottom: 1px solid rgb(206, 255, 251);
+}
+
+.popup {
+    transform: translate(-50%, -50%);
+    position:fixed;
+    padding: 20px;
+    border-radius: 5px;
+    width: 70%;
+    max-width: 600px;
+    height: 20%;
+    max-height: 600px;
+    overflow-y: auto;
+    left:50%;
+    top:50%;
+    z-index: 999;
+  }
+  
+.popup form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+   

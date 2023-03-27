@@ -1,0 +1,36 @@
+.exp-item-row{
+    border:1px solid #e5e7eb;
+    padding: 15px 0 20px 10px;
+    border-radius: 5px;
+    margin-top:20px;
+    height:100px;
+    
+}
+.exp-item-row>div{
+    height:75px;
+    display: flex;
+    align-items: center;
+    min-width: 120px;
+
+}
+.company-col{
+    margin-right:-8px;
+}
+.pos-name-col{
+    margin-right:-5px;
+}
+.expand{
+    margin:0 0 0 auto;
+}
+.expand-row{
+    border: 1px solid #e5e7eb;
+    padding: 15px 0 20px 10px;
+    border-radius: 5px;
+}
+.expand-title-btn{
+    display: flex;
+}
+.expand-row>p{
+    font-size: 14px;
+    padding: 4px;
+}

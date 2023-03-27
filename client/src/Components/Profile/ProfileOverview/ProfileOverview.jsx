@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./ProfileOverview.css"
+import HeaderForm from "../../HeaderForm/HeaderForm"
 
 export default function ProfileOverview(details) {
+
+  const { first_name, last_name, tagline, profile_headline } = details.details;
+  const [profileForm, setProfileForm] = useState(false)
 
   return (
       <>
@@ -20,9 +24,23 @@ export default function ProfileOverview(details) {
                     </div>
                 </section>
         <div className='overview'>
-                  <h2>{details.first_name +" "+details.last_name}</h2>
-                  <h3>{ details.tagline}</h3>
-                  <p>{ details.profile_headline}</p>
+          
+          
+            <div className='buttons'>
+            
+            <h2>{first_name + " " + last_name}</h2>
+            <button className='mod-btn' onClick={()=>setProfileForm(true)}>
+              {profileForm && <HeaderForm/>}
+              <img src='https://cdn-icons-png.flaticon.com/512/1159/1159633.png' />
+              </button>
+          </div>
+                  
+          <h3>{tagline}</h3>
+          <div className='overview-desc'>
+            <h3>Overview</h3>
+            <p >{ profile_headline}</p>
+          </div>
+
         </div>
           </div>
       </>

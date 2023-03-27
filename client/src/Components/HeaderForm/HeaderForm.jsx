@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import "./HeaderForm.css"
 
 const Header = () => {
 
@@ -8,7 +9,7 @@ const Header = () => {
     const [person, setPerson] = useState(null);
 
 
-    const uri = `http://localhost:4000/person/1`
+    const uri = `http://localhost:5000/profile/1`
 
     const getPerson = async () => {
         // 
@@ -25,7 +26,7 @@ const Header = () => {
     }, []);
 
     return (
-        <form method="post">
+        <form className='header-form' method="post">
             <label for="fname">First name:</label><br />
             <input type="text" id="fname" name="fname" /><br />
             <label for="lname">Last name:</label><br />

@@ -12,3 +12,14 @@
 button>img{
     width:25px;
 }
+.exp-col-row{
+    border-bottom: 1px solid grey;
+    height:30px;
+    font-size: 13px;
+}
+.title{
+    margin: 0;
+}
+.data-container{
+    padding: 18px;
+}
