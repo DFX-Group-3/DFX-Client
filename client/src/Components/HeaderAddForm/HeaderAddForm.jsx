@@ -63,18 +63,24 @@ const Header = () => {
             }
 
             return <Form.Group key={key}>
-                <Form.Label>{key}</Form.Label>
+                <Form.Label>{formatName(key)}</Form.Label>
                 <Form.Control
                     id={key}
                     name={key}
                     text='text'
-                    placeholder={key}
+                    placeholder={formatName(key)}
                     value={person[key]}
                     onChange={handleChange}
                 />
             </Form.Group>
         });
     }
+
+    const formatName = field => {
+        let newName = field.replace('_', ' ');
+        newName = field[0].toUpperCase() + newName.slice(1);
+        return newName;
+    };
 
     return (
         <>
