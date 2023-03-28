@@ -34,7 +34,7 @@ const HeaderEditForm = () => {
     const getCountries = async () => {
         try {
             const responseData = await axios.get(`https://restcountries.com/v3.1/all?fields=name`);
-            console.log(responseData.data)
+            // console.log(responseData.data)
             setCountries(responseData.data)
             return responseData.data;
         }
@@ -48,10 +48,16 @@ const HeaderEditForm = () => {
     }, [])
 
     const [countries, setCountries] = useState([])
-    const allCountries = countries.map(country => {
+    const countryNames = countries.map(country => {
+        return (country.name.common)
+    })
+
+    countryNames.sort()
+
+    const allCountries = countryNames.map(country => {
         return (
-            <option value={country.name.common} key={country.name.common}>
-                {country.name.common}
+            <option value={country} key={country}>
+                {country}
             </option>
         )
     })
@@ -91,6 +97,7 @@ const HeaderEditForm = () => {
                 return <Form.Group key={key}>
                     <label htmlFor="nationality">Nationality:</label><br />
                     <select id="nationality" name="nationality" defaultValue={profile.nationality} onChange={handleChange}>
+
                         {allCountries}
                     </select>
                 </Form.Group>
