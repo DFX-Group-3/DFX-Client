@@ -23,16 +23,6 @@ function App() {
   //   if (result?.error) console.log(`An error occured while adding person data`);
   // }
 
-  const editPerson = async person => {
-    try {
-      const responseData = await axios.put(`http://localhost:4000/person/${12}`, person);
-      return responseData.data;
-    }
-    catch (e) {
-      return { error: `Error` };
-    }
-  }
-
   return (
     <>
       {/* <div

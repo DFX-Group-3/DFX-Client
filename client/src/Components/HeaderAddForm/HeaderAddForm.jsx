@@ -2,25 +2,28 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+const user_id = 1;
 
 const Header = () => {
 
     // all in 1
-    const [person, setPerson] = useState({
-        first_name: '',
-        last_name: '',
-        gender: '',
+    const [profile, setProfile] = useState({
+        firstName: '',
+        lastName: '',
+        pronouns: '',
         tagline: '',
-        linkedin_url: '',
-        github_url: '',
-        youtube_url: '',
-        profile_headline: '',
-        nationality: 'england'
+        linkedInUrl: '',
+        githubUrl: '',
+        profileVideoUrl: '',
+        profileHeadline: '',
+        nationality: 'england',
+        user_id: undefined
     });
 
-    const addPerson = async person => {
+
+    const addProfile = async profile => {
         try {
-            const responseData = await axios.post(`http://localhost:4000/person`, person);
+            const responseData = await axios.post(`http://localhost:4000/profile`, profile);
             return responseData.data;
         }
         catch (e) {
@@ -29,36 +32,39 @@ const Header = () => {
     }
 
     function handleChange(e) {
-        setPerson({
-            ...person,
+        setProfile({
+            ...profile,
             [e.target.name]: e.target.value
         });
-        console.log(person);
+        console.log(profile);
     }
 
     // handle form data when being submit
     const handleSubmit = e => {
         e.preventDefault();
-        addPerson(person);
+        profile.user_id = user_id;
+        addProfile(profile);
     }
 
 
     const formFields = () => {
-        return Object.keys(person).map(key => {
-
-            if (key === 'nationality') {
+        return Object.keys(profile).map(key => {
+            if (key === 'user_id') {
+                return;
+            }
+            else if (key === 'nationality') {
                 return <Form.Group key={key}>
                     <label htmlFor="nationality">Nationality:</label><br />
-                    <select id="nationality" name="nationality" defaultValue={person.nationality} onChange={handleChange}>
+                    <select id="nationality" name="nationality" defaultValue={profile.nationality} onChange={handleChange}>
                         <option value="england" >England</option>
                         <option value="scotland">Scotland</option>
                         <option value="wales">Wales</option>
                     </select>
                 </Form.Group>
-            } else if (key === 'profile_headline') {
+            } else if (key === 'profileHeadline') {
                 return <Form.Group key={key}>
-                    <label htmlFor="profile_headline">Headline:</label><br />
-                    <textarea type="text" id="profile_headline" name="profile_headline" rows="4" cols="50" value={person.profile_headline} onChange={handleChange} /><br />
+                    <label htmlFor="profileHeadline">Headline:</label><br />
+                    <textarea type="text" id="profileHeadline" name="profileHeadline" rows="4" cols="50" value={profile.profileHeadline} onChange={handleChange} /><br />
                 </Form.Group>
             }
 
@@ -69,7 +75,7 @@ const Header = () => {
                     name={key}
                     text='text'
                     placeholder={formatName(key)}
-                    value={person[key]}
+                    value={profile[key]}
                     onChange={handleChange}
                 />
             </Form.Group>
