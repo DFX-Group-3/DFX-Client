@@ -31,6 +31,31 @@ const Header = () => {
         }
     }
 
+    const getCountries = async () => {
+        try {
+            const responseData = await axios.get(`https://restcountries.com/v3.1/all?fields=name`);
+            console.log(responseData.data)
+            setCountries(responseData.data)
+            return responseData.data;
+        }
+        catch (e) {
+            return { error: `Error` };
+        }
+    }
+
+    useEffect(() => {
+        getCountries()
+    }, [])
+
+    const [countries, setCountries] = useState([])
+    const allCountries = countries.map(country => {
+        return (
+            <option value={country.name.common} key={country.name.common}>
+                {country.name.common}
+            </option>
+        )
+    })
+
     function handleChange(e) {
         setProfile({
             ...profile,
@@ -56,9 +81,7 @@ const Header = () => {
                 return <Form.Group key={key}>
                     <label htmlFor="nationality">Nationality:</label><br />
                     <select id="nationality" name="nationality" defaultValue={profile.nationality} onChange={handleChange}>
-                        <option value="england" >England</option>
-                        <option value="scotland">Scotland</option>
-                        <option value="wales">Wales</option>
+                        {allCountries}
                     </select>
                 </Form.Group>
             } else if (key === 'profileHeadline') {
