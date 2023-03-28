@@ -1,26 +1,29 @@
 import axios from 'axios';
+import { Form, Button } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
+const user_id = 2;
 
 const HeaderEditForm = () => {
     // test id is 12
-    const userID = 12;
+    //const userID = 1;
     const [profile, setProfile] = useState({
-        first_name: '',
-        last_name: '',
-        gender: '',
+        firstName: '',
+        lastName: '',
+        pronouns: '',
         tagline: '',
-        linkedin_url: '',
-        github_url: '',
-        youtube_url: '',
-        profile_headline: '',
-        nationality: ''
+        linkedInUrl: '',
+        githubUrl: '',
+        profileVideoUrl: '',
+        profileHeadline: '',
+        nationality: '',
+        user_id: undefined
     });
 
-    const uri = `http://localhost:4000/profile/${userID}`;
+    const uri = `http://localhost:4000/profile/${user_id}`;
 
     const editProfile = async profile => {
         try {
-            const responseData = await axios.put(`http://localhost:4000/profile/${1}`, profile);
+            const responseData = await axios.put(`http://localhost:4000/profile/${user_id}`, profile);
             return responseData.data;
         }
         catch (e) {
@@ -53,10 +56,63 @@ const HeaderEditForm = () => {
         editProfile(profile);
     }
 
+    const formFields = () => {
+        return Object.keys(profile).map(key => {
+            if (key === 'user_id' || key === 'id') {
+                return;
+            }
+            else if (key === 'nationality') {
+                return <Form.Group key={key}>
+                    <label htmlFor="nationality">Nationality:</label><br />
+                    <select id="nationality" name="nationality" defaultValue={profile.nationality} onChange={handleChange}>
+                        <option value="england" >England</option>
+                        <option value="scotland">Scotland</option>
+                        <option value="wales">Wales</option>
+                    </select>
+                </Form.Group>
+            } else if (key === 'profileHeadline') {
+                return <Form.Group key={key}>
+                    <label htmlFor="profileHeadline">Headline:</label><br />
+                    <textarea type="text" id="profileHeadline" name="profileHeadline" rows="4" cols="50" value={profile.profileHeadline} onChange={handleChange} /><br />
+                </Form.Group>
+            }
+
+            return <Form.Group key={key}>
+                <Form.Label>{formatName(key)}</Form.Label>
+                <Form.Control
+                    id={key}
+                    name={key}
+                    text='text'
+                    placeholder={formatName(key)}
+                    value={profile[key]}
+                    onChange={handleChange}
+                />
+            </Form.Group>
+        });
+    }
+
+    const formatName = field => {
+        let newName = field.replace('_', ' ');
+        newName = field[0].toUpperCase() + newName.slice(1);
+        return newName;
+    };
+
     return (
         <>
             <h3>Edit</h3>
-            <form onSubmit={handleSubmit}>
+
+            <Form onSubmit={e => handleSubmit(e)}>
+
+                {formFields()}
+
+                <Button
+                    variant='primary'
+                    type='submit'
+                    onClick={e => handleSubmit(e)}
+                >Update</Button>
+            </Form>
+
+            {/* <form onSubmit={handleSubmit}>
                 <label htmlFor="first_name">First name:</label><br />
                 <input type="text" id="first_name" name="first_name" value={profile.first_name} onChange={handleChange} /><br />
 
@@ -83,7 +139,6 @@ const HeaderEditForm = () => {
 
                 <label htmlFor="nationality">Nationality:</label><br />
                 <select name="nationality" id="nationality" form="" value={profile.nationality} onChange={handleChange}>
-                    {/* need to do default value */}
                     <option value="england" >England</option>
                     <option value="scotland">Scotland</option>
                     <option value="wales">Wales</option>
@@ -92,7 +147,7 @@ const HeaderEditForm = () => {
 
 
                 <input type="submit" value="Submit" />
-            </form>
+            </form> */}
         </>
     )
 }
