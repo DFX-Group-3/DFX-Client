@@ -1,0 +1,14 @@
+.popup {
+    transform: translate(-50%, -50%);
+    position:fixed;
+    padding: 20px;
+    border-radius: 5px;
+    width: 70%;
+    max-width: 600px;
+    height: 20%;
+    max-height: 600px;
+    overflow-y: auto;
+    left:50%;
+    top:50%;
+    z-index: 999;
+  }

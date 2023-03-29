@@ -1,0 +1,29 @@
+.border-col{
+background-color: aliceblue;
+
+}
+.title-bts{
+    display: flex;
+}
+.buttons{
+    margin: 0 0 0 auto;
+    
+}
+.buttons>button{
+    border: none;
+    background-color: transparent;
+}
+button>img{
+    width:25px;
+}
+.exp-col-row{
+    border-bottom: 1px solid grey;
+    height:30px;
+    font-size: 13px;
+}
+.title{
+    margin: 0;
+}
+.data-container{
+    padding: 18px;
+}
