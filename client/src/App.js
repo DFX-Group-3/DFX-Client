@@ -30,12 +30,12 @@ function App() {
         <Navbar />
         <Routes>
           <Route
-            path="/login"
+            path="/"
             element={!user ? <Login /> : <Navigate to="/profile" />}
           />
           <Route
             path="/profile"
-            element={user ? <Profile /> : <Navigate to="/login" />}
+            element={user ? <Profile /> : <Navigate to="/" />}
           />
         </Routes>
       </BrowserRouter>

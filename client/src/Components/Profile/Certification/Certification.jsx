@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import "./Certification.css"
 import CertificationItem from "./CertificationItem"
 
 
@@ -18,7 +19,8 @@ export default function Certification() {
               <img src='https://cdn-icons-png.flaticon.com/512/2311/2311991.png' />
               </button>
             {popupForm && (
-              <div className="popup" >
+              <div className="popup">
+                <button className='close-form-button' onClick={()=>setpopupForm(false)}>X</button>
                 <form>
                   <label htmlFor="certification">Certifications</label>
                   <select value={selectedValue} onChange={(e) => { setSelectedValue(e.target.value) }}>
@@ -34,6 +36,8 @@ export default function Certification() {
         </div>
         
         </div>
+        <CertificationItem />
+        <CertificationItem />
         <CertificationItem/>
     </div>
     </>

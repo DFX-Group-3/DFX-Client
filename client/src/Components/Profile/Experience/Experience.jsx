@@ -3,11 +3,10 @@ import "./Experience.css"
 import ExperienceItem from './ExperienceItem/ExperienceItem'
 
 export default function Experience(props) {
+
   const [experienceItems, setExperienceItems] = useState([])
+  const [ popupForm, setPopupForm] = useState(false)
 
-  
-
-  
   return (
       <>
       <div className='border-col'>
@@ -18,7 +17,7 @@ export default function Experience(props) {
             <button>
               <img src='https://cdn-icons-png.flaticon.com/512/1159/1159633.png' />
               </button>
-            <button>
+            <button onClick={()=>setPopupForm(true)}>
               <img src='https://cdn-icons-png.flaticon.com/512/2311/2311991.png' />
               </button>
             </div>
