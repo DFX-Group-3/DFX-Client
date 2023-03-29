@@ -24,7 +24,7 @@ export default function ProfileOverview(details) {
             })
         setPerson(response.data[0])
         
-          
+
           
    }
    
@@ -41,7 +41,7 @@ const { profileImageURL,
     profileVideoURL,
     tagline } = person;
 
-  console.log(person)
+  
 
   
   
