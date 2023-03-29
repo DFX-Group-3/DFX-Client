@@ -2,6 +2,7 @@ import { useState, useEffect} from "react";
 import axios from "axios";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import QualificationItem from "./QualificationItem";
 
 export default function Qualification() {
   const [qualificationItems, setQualificationItems] = useState([]);
@@ -49,15 +50,18 @@ export default function Qualification() {
     fetchData();
   }, []);
   return (
-    <div>
-      <h2 className="titile"> Qualifications</h2>
+    <div className="border-col">
+      <div className="title-bts">
+        <h2 className="title"> Qualifications</h2>
       <div className="buttons">
+        
         <button>
           <img src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" />
         </button>
         <button onClick={() => setpopupForm(true)}>
           <img src="https://cdn-icons-png.flaticon.com/512/2311/2311991.png" />
         </button>
+        </div>
       {popupForm && (
       <div className="popup">
         <form onSubmit={handleSubmit}>
@@ -96,8 +100,12 @@ export default function Qualification() {
           <button onClick={() => setpopupForm(false)}>Submit</button>
         </form>
       </div>
-      )}
+        )}
+        
       </div>
+      <QualificationItem />
+      <QualificationItem />
+      <QualificationItem/>
     </div>
   );
 }

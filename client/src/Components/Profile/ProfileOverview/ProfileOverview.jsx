@@ -23,9 +23,11 @@ export default function ProfileOverview(details) {
                 }
             })
         setPerson(response.data[0])
+        
+
           
-          
-    }
+   }
+   
    getPerson();
     },[]) 
 const { profileImageURL,
@@ -39,7 +41,7 @@ const { profileImageURL,
     profileVideoURL,
     tagline } = person;
 
-  console.log(person)
+  
 
   
   
@@ -51,12 +53,15 @@ const { profileImageURL,
                   </div>
               <section className='profile-section'>
                 <div className='prof-pic'>
-                      <img src="https://picsum.photos/200/200" />
-                      <img className="nationality" src="https://picsum.photos/60/40"/>
+            <img src="https://picsum.photos/200/200" />
+            <div>
+            <img className="nationality" src="https://picsum.photos/60/40"/>
+            </div>
+                      
                     </div>
                     <div className='prof-buttons'>
-                    <button className="fa fa-github">Github</button>
-                        <button className="fa fa-linkedin">LinkedIn</button> 
+                    <button className="github-logo"><img src='https://cdn-icons-png.flaticon.com/512/25/25231.png'/></button>
+                        <button className="linkedin-logo"><img src='https://static.vecteezy.com/system/resources/previews/009/097/186/original/blue-color-white-background-linkedin-design-logo-sign-symbol-free-vector.jpg'/></button> 
                     </div>
                 </section>
         <div className='overview'>
