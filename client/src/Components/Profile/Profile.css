@@ -1,0 +1,51 @@
+* {
+     overflow-x: none;
+     
+}
+h3{
+     font-size: 1em;
+}
+.container-row {
+    margin-top: 20px;
+    
+}
+
+.row {
+     --bs-gutter-x: 0;
+     
+}
+
+.div-container {
+    max-width: 90%;
+    margin: 0 auto;
+    
+
+}
+
+.col-3 {
+     width: 32%;
+     height: 150px;
+     height:100%;
+    
+}
+
+.r-col {
+     margin: 0 0 0 auto;
+    
+}
+
+.experience-div>.col-2 {
+     display: inline;
+    
+}
+
+.certification-div {
+     display: flex;
+    
+}
+.border-col {
+     border: 1px solid #e5e7eb;
+     border-radius: 15px;
+     margin-bottom:20px;
+     background-color: white;
+}
