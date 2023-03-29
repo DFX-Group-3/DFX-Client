@@ -27,7 +27,7 @@ export default function Profile() {
             setExperience(experienceData.data)
         }
         fetchUserData();
-        fetchUserExperienceData();
+        // fetchUserExperienceData();
     }, []);
     
     

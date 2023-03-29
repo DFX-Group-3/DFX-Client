@@ -1,15 +1,20 @@
 import "./App.css";
+import Login from "./pages/Login";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Profile from "./Components/Profile/Profile";
-import { useState, useEffect } from "react";
+import Navbar from "./Components/Profile/Navbar/Navbar";
+import { useUserContext } from "./hooks/UseUserContext";
+import { useState } from "react";
 import classNames from "classnames";
-import HeaderAddForm from "./Components/HeaderAddForm/HeaderAddForm";
 
 function App() {
   const [mode, setMode] = useState("day");
+  const { user } = useUserContext();
 
   function toggleMode() {
     setMode(mode == "day" ? "dark" : "day");
   }
+
   return (
     <>
       <div
@@ -20,7 +25,20 @@ function App() {
       >
         <button onClick={toggleMode}>Toggle Mode</button>
       </div>
-      <Profile />
+
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/profile" />}
+          />
+          <Route
+            path="/profile"
+            element={user ? <Profile /> : <Navigate to="/login" />}
+          />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

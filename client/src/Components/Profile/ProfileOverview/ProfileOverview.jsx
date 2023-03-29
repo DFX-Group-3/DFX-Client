@@ -1,12 +1,48 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./ProfileOverview.css"
 import HeaderForm from "../../HeaderForm/HeaderForm"
+import { useUserContext } from '../../../hooks/UseUserContext';
+import axios from 'axios';
 
 export default function ProfileOverview(details) {
 
-  const { first_name, last_name, tagline, profile_headline } = details.details;
+  const { user } = useUserContext();
+  
   const [profileForm, setProfileForm] = useState(false)
+  const [person, setPerson] = useState([])
+  
 
+ useEffect(() => {
+        const getPerson = async () => {
+          const uri = `http://localhost:9000/profile`
+          
+        const response = await axios.get(uri,{
+            headers: {
+                
+                'Authorization' : `Bearer ${user.token}`
+                }
+            })
+        setPerson(response.data[0])
+          
+          
+    }
+   getPerson();
+    },[]) 
+const { profileImageURL,
+    firstName,
+    lastName,
+    nationality,
+    linkedInURL,
+    pronouns,
+    githubURL,
+    profileHeadline,
+    profileVideoURL,
+    tagline } = person;
+
+  console.log(person)
+
+  
+  
   return (
       <>
       <div className='profile-div'>
@@ -28,7 +64,7 @@ export default function ProfileOverview(details) {
           
             <div className='buttons'>
             
-            <h2>{first_name + " " + last_name}</h2>
+            <h2>{firstName + " " + lastName}</h2>
             <button className='mod-btn' onClick={()=>setProfileForm(true)}>
               {profileForm && <HeaderForm/>}
               <img src='https://cdn-icons-png.flaticon.com/512/1159/1159633.png' />
@@ -38,7 +74,7 @@ export default function ProfileOverview(details) {
           <h3>{tagline}</h3>
           <div className='overview-desc'>
             <h3>Overview</h3>
-            <p >{ profile_headline}</p>
+            <p >{ profileHeadline}</p>
           </div>
 
         </div>
