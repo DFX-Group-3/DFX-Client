@@ -10,13 +10,13 @@ const Header = () => {
     const [profile, setProfile] = useState({
         firstName: '',
         lastName: '',
-        pronouns: '',
-        tagline: '',
-        linkedInUrl: '',
-        githubUrl: '',
-        profileVideoUrl: '',
-        profileHeadline: '',
         nationality: 'england',
+        linkedInUrl: '',
+        pronouns: '',
+        githubUrl: '',
+        profileHeadline: '',
+        profileVideoUrl: '',
+        tagline: '',
         user_id: undefined
     });
 
@@ -125,11 +125,12 @@ const Header = () => {
 
                 {formFields()}
 
-                <Button
+                {/* <Button
                     variant='primary'
                     type='submit'
                     onClick={e => handleSubmit(e)}
-                >Submit</Button>
+                >Submit</Button> */}
+                <input type="submit" value="Submit" />
             </Form>
         </>
 

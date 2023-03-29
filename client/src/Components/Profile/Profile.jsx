@@ -10,18 +10,21 @@ import Qualification from './Qualification/Qualification';
 import KeyTools from './KeyTools/KeyTools';
 import Interests from './Interests/Interests';
 import Languages from './Languages/Languages';
+import { useUserContext } from '../../hooks/UseUserContext';
 
 export default function Profile() {
 
-    
+    const { user } = useUserContext();
     const [details, setDetails] = useState([]);
     const [experience, setExperience] = useState([]);
 
+    const fetchUserData = async () => {
+        const data = await retrieveUser(user);
+        setDetails(data.data[0]);
+    };
+
     useEffect(() => {
-        const fetchUserData = async () => {
-            const data = await retrieveUser();
-            setDetails(data.data);
-        };
+
         const fetchUserExperienceData = async () => {
             const experienceData = await retrieveUserExperience();
             setExperience(experienceData.data)
@@ -29,29 +32,30 @@ export default function Profile() {
         fetchUserData();
         // fetchUserExperienceData();
     }, []);
-    
-    
+
+
     return (
         <>
             <div className='div-container'>
-                <ProfileOverview details={details} />
+                {/* <ProfileOverview details={details} /> */}
+                <ProfileOverview />
                 <div className="row gx-1 container-row">
                     {/**Column for the left side (portfolio, experience etc) */}
                     <div className="col-8 ">
                         {/**That is 1 part (experience) until the next comment */}
-                        <Experience experience={experience} />
+                        {/* <Experience experience={experience} /> */}
                         {/**Next part starts here */}
-                        <Portfolio />
-                       
+                        {/* <Portfolio /> */}
+
                     </div>
                     {/**The column for the right side(qualification, certification etc) */}
                     <div className="col-3 r-col">
                         {/**Certification part of right column */}
-                        <Certification />
+                        {/* <Certification />
                         <Qualification />
                         <KeyTools />
                         <Interests />
-                        <Languages />
+                        <Languages /> */}
                     </div>
                 </div>
             </div>
