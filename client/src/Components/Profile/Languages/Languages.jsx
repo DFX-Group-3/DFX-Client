@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import LanguagesItem from './LanguagesItem';
 
 export default function Languages() {
   const [popupForm, setpopupForm]=useState(false);
@@ -32,7 +33,7 @@ export default function Languages() {
               <img alt='addButton' src='https://cdn-icons-png.flaticon.com/512/2311/2311991.png' />
               </button>
             {popupForm && (
-              <div className="popup" ></div>)}
+              <div className="popup" >
               <form onSubmit={handleSubmit}>
         <label htmlFor="certification">Languages</label>
         <select value={selectedValue} onChange={(e)=>{setSelectedValue(e.target.value)}}>Level
@@ -56,10 +57,13 @@ export default function Languages() {
         <option value="option">3</option>
          </select>
         <button onClick ={()=>setpopupForm(false)}>Submit</button>
-                </form>
+              </form>
+              </div>)}
             </div>
         </div>
-  
+      <LanguagesItem />
+      <LanguagesItem />
+      <LanguagesItem/>
     </div>
   )
 }
