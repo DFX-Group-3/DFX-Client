@@ -29,7 +29,11 @@ const HeaderEditForm = ({ overview }) => {
 
     const editProfile = async profile => {
         try {
-            const responseData = await axios.put(`http://localhost:9000/profile/${user._id}`, profile);
+            const responseData = await axios.patch(`http://localhost:9000/profile`, profile, {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
             return responseData.data;
         }
         catch (e) {
