@@ -20,7 +20,6 @@ const HeaderForm = ({ overview }) => {
 
     const { user } = useUserContext();
     const [profile, setProfile] = useState(overview.user_id ? overview : emptyProfile);
-    //const [profile, setProfile] = useState(emptyProfile);
 
     const editProfile = async profile => {
         try {
@@ -90,10 +89,8 @@ const HeaderForm = ({ overview }) => {
         });
     }
 
-    // handle form data when being submit
     const handleSubmit = e => {
         e.preventDefault();
-        // editProfile(profile);
 
         if (profile.user_id) {
             editProfile(profile);
