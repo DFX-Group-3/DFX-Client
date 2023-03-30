@@ -13,7 +13,6 @@ export default function Portfolio() {
     title: "",
     priority: "",
   });
-  const [selectedItem, setSelectedItem] = useState(null);
 
 
   const handleChange = (event) => {
@@ -25,35 +24,15 @@ export default function Portfolio() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  //   try {
-  //     const res = await axios.post("/api/portfolio", portfolioData);
-  //     console.log(res.data);
-  //     setpopupForm(false);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-  // const handleRemove = async () => {
-  //   try {
-  //   await axios.delete(`/api/portfolio/${selectedItem.id}`);
-  //   setPortfolioItems(portfolioItems.filter((item) => item.id !== selectedItem.id));
-  //   setSelectedItem(null);
-  //   } catch (error) {
-  //   console.error(error);
-  //   }
-    };
-
-  useEffect(() => {
-    async function fetchData() {
-      // try {
-      //   const response = await axios.get("/api/portfolio");
-      //   setPortfolioItems(response.data);
-      // } catch (error) {
-      //   console.error(error);
-      // }
+    try {
+      const res = await axios.post("http://localhost:9000/portfolio", portfolioData);
+      console.log(res.data);
+      setpopupForm(false);
+    } catch (error) {
+      console.error(error);
     }
-    fetchData();
-  }, []);
+  };
+
 
   return (
     <>
@@ -105,7 +84,7 @@ export default function Portfolio() {
                     name="priority"
                     onChange={handleChange}
                   />
-                  <button onClick={() => setpopupForm(false)}>Submit</button>
+                  <button onClick={() => setpopupForm(false)} >Submit</button>
                 </form>
               </div>
             )}
@@ -124,4 +103,4 @@ export default function Portfolio() {
       </div>
     </>
   );
-}
+          }

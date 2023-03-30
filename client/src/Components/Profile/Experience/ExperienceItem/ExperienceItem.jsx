@@ -9,9 +9,9 @@ export default function ExperienceItem(props) {
 
   useEffect(() => {
     const getExperience = async () => {
-      const uri = `http://localhost:9000/experience`;
+      const url = `http://localhost:9000/experience`;
 
-      const response = await axios.get(uri, {
+      const response = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
