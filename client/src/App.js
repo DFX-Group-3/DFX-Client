@@ -5,6 +5,7 @@ import Profile from "./Components/Profile/Profile";
 import Navbar from "./Components/Profile/Navbar/Navbar";
 import { useUserContext } from "./hooks/UseUserContext";
 import { useState } from "react";
+import axios from "axios";
 import classNames from "classnames";
 
 function App() {

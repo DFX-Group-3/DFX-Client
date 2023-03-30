@@ -3,14 +3,14 @@ import "./ProfileOverview.css"
 import HeaderForm from "../../HeaderForm/HeaderForm"
 import { useUserContext } from '../../../hooks/UseUserContext';
 import axios from 'axios';
+import { retrieveUser } from '../../../Utils/GetDetails.js'
 
-export default function ProfileOverview(details) {
+export default function ProfileOverview() {
 
   const { user } = useUserContext();
 
-  const [profileForm, setProfileForm] = useState(false)
-  // const [person, setPerson] = useState([])
-  const [person, setPerson] = useState({
+  const [profileForm, setProfileForm] = useState(false);
+  const [overview, setOverview] = useState({
     firstName: '',
     lastName: '',
     nationality: '',
@@ -23,47 +23,15 @@ export default function ProfileOverview(details) {
     tagline: ''
   });
 
+  const fetchUserData = async () => {
+    const data = await retrieveUser(user);
+    // if (data.data) setOverview(data.data);  // what *should* be in use
+    if (data.data[0]) setOverview(data.data[0]);  // temp because of backend code
+  };
 
   useEffect(() => {
-    const getPerson = async () => {
-      const uri = `http://localhost:9000/profile`
-
-      const response = await axios.get(uri, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
-      })
-      setPerson(response.data[0])
-      console.log(response.data[0])
-    }
-    getPerson();
-  }, [])
-
-  const { profileImageURL,
-    firstName,
-    lastName,
-    nationality,
-    linkedInURL,
-    pronouns,
-    githubURL,
-    profileHeadline,
-    profileVideoURL,
-    tagline } = person;
-
-
-
-  // console.log(person)
-  // const profileImageURL = person.profileImageURL
-  // const firstName = person.firstName
-  // const lastName = person.lastName
-  // const nationality = person.nationality
-  // const linkedInURL = person.linkedInURL
-  // const pronouns = person.pronouns
-  // const githubURL = person.githubURL
-  // const profileHeadline = person.profileHeadline
-  // const profileVideoURL = person.profileVideoURL
-  // const tagline = person.tagline
-
+    fetchUserData();
+  }, []);
 
   return (
     <>
@@ -89,21 +57,21 @@ export default function ProfileOverview(details) {
 
           <div className='buttons'>
 
-            <h2>{firstName + " " + lastName}</h2>
+            <h2>{overview.firstName + " " + overview.lastName}</h2>
             <button className='mod-btn' onClick={() => setProfileForm(true)}>
-              {profileForm && <HeaderForm />}
+              {profileForm && <HeaderForm overview={overview} />}
               <img src='https://cdn-icons-png.flaticon.com/512/1159/1159633.png' />
             </button>
           </div>
 
-          <h3>{tagline}</h3>
+          <h3>{overview.tagline}</h3>
           <div className='overview-desc'>
             <h3>Overview</h3>
-            <p >{profileHeadline}</p>
+            <p >{overview.profileHeadline}</p>
           </div>
 
         </div>
-      </div>
+      </div >
     </>
   )
 }

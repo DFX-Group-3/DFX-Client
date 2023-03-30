@@ -10,12 +10,18 @@ import Qualification from './Qualification/Qualification';
 import KeyTools from './KeyTools/KeyTools';
 import Interests from './Interests/Interests';
 import Languages from './Languages/Languages';
+import { useUserContext } from '../../hooks/UseUserContext';
 
 export default function Profile() {
 
-    
+    const { user } = useUserContext();
     const [details, setDetails] = useState([]);
     const [experience, setExperience] = useState([]);
+
+    const fetchUserData = async () => {
+        const data = await retrieveUser(user);
+        setDetails(data.data[0]);
+    };
 
     useEffect(() => {
         // const fetchUserData = async () => {
@@ -29,8 +35,8 @@ export default function Profile() {
         // fetchUserData();
         // fetchUserExperienceData();
     }, []);
-    
-    
+
+
     return (
         <>
             <div className='div-container'>
@@ -42,7 +48,7 @@ export default function Profile() {
                         <Experience experience={experience} />
                         {/**Next part starts here */}
                         <Portfolio />
-                       
+
                     </div>
                     {/**The column for the right side(qualification, certification etc) */}
                     <div className="col-3 r-col">
