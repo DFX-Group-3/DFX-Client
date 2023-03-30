@@ -142,17 +142,19 @@ const HeaderForm = ({ overview }) => {
     };
 
     return (
-        <Form onSubmit={e => handleSubmit(e)}>
+        <div className="popup">
+            <Form onSubmit={e => handleSubmit(e)}>
 
-            {formFields()}
+                {formFields()}
 
-            {/* <Button
-                    variant='primary'
-                    type='submit'
-                    onClick={e => handleSubmit(e)}
-                >Update</Button> */}
-            <input type="submit" value="Submit" />
-        </Form>
+                {/* <Button
+                        variant='primary'
+                        type='submit'
+                        onClick={e => handleSubmit(e)}
+                    >Update</Button> */}
+                <input type="submit" value="Submit" />
+            </Form>
+        </div>
     )
 }
 
