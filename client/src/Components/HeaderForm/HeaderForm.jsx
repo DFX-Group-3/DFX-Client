@@ -1,183 +1,162 @@
 import axios from 'axios';
+import { Form, Button } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
-import "./HeaderForm.css"
-import {useUserContext} from "../../hooks/UseUserContext"
+import { useUserContext } from '../../hooks/UseUserContext';
 
-const Header = () => {
+const HeaderForm = ({ overview }) => {
+
+    const emptyProfile = {
+        firstName: '',
+        lastName: '',
+        nationality: '',
+        linkedInURL: '',
+        pronouns: '',
+        githubURL: '',
+        profileHeadline: '',
+        profileVideoURL: '',
+        profileImageURL: '',
+        tagline: ''
+    };
 
     const { user } = useUserContext();
-    // use state
-    const [person, setPerson] = useState(null);
-    const [error, setError] = useState(null)
-    const [isLoading , setIsLoading] = useState([])
-    const [overview, setOverview] = useState({
-      profileImageURL: ``,
-      firstName: ``,
-      lastName: ``,
-      pronouns: ``,
-      tagline: ``,
-      linkedInURL: ``,
-      githubURL: ``,
-      profileVideoURL: ``,
-      profileHeadline: ``,
-      nationality: ``,
-    });
+    const [profile, setProfile] = useState(overview.user_id ? overview : emptyProfile);
+    //const [profile, setProfile] = useState(emptyProfile);
 
-    
-    
-
-    
-    const formSubmit = async (e) => {
-        e.preventDefault();
-        
-        await axios.post(`http://localhost:9000/profile`, overview,{
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${user.token}`
+    const editProfile = async profile => {
+        try {
+            const responseData = await axios.patch(`http://localhost:9000/profile`, profile, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
                 }
-        }).then(res => {
-            console.log(res)
-            console.log(user._id)
-        }).catch(function(error){
-                    if (error.response) {
-                        console.log(error.response)
-                        setError(error.response.data.error)
-                        
-                    }
-            })
-            
-       
+            });
+            return responseData.data;
+        }
+        catch (e) {
+            return { error: `Error` };
+        }
     }
-    const handleChange = event => {
-        const { name, value } = event.target;
-        setOverview({
-            ...overview,
-            [name]: value
+
+    const addProfile = async profile => {
+        try {
+            const responseData = await axios.post(`http://localhost:9000/profile`, profile, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
+            console.dir(responseData.data)
+            return responseData.data;
+        }
+        catch (e) {
+            return { error: `Error` };
+        }
+    }
+
+    const getCountries = async () => {
+        try {
+            const responseData = await axios.get(`https://restcountries.com/v3.1/all?fields=name`);
+            setCountries(responseData.data)
+            return responseData.data;
+        }
+        catch (e) {
+            return { error: `Error` };
+        }
+    }
+
+    useEffect(() => {
+        getCountries();
+    }, [])
+
+    const [countries, setCountries] = useState([])
+    const countryNames = countries.map(country => {
+        return (country.name.common)
+    })
+
+    countryNames.sort()
+
+    const allCountries = countryNames.map(country => {
+        return (
+            <option value={country} key={country}>
+                {country}
+            </option>
+        )
+    })
+
+    function handleChange(e) {
+        setProfile({
+            ...profile,
+            [e.target.name]: e.target.value
         });
     }
-   
-    //console.log(getPerson());
 
-    // useEffect(() => {
-    //     getPerson();
-    //     console.log('Use effect called!');
-    // }, []);
-    // console.log(overview.nationality)
+    // handle form data when being submit
+    const handleSubmit = e => {
+        e.preventDefault();
+        // editProfile(profile);
+
+        if (profile.user_id) {
+            editProfile(profile);
+        }
+        else {
+            addProfile(profile)
+        }
+    }
+
+    const formFields = () => {
+        return Object.keys(profile).map(key => {
+            if (key === 'user_id' || key === '_id' || key === '__v') {
+                return;
+            }
+            else if (key === 'nationality') {
+                return <Form.Group key={key}>
+                    <label htmlFor="nationality">Nationality:</label><br />
+                    <select id="nationality" name="nationality" defaultValue={profile.nationality} onChange={handleChange}>
+
+                        {allCountries}
+                    </select>
+                </Form.Group>
+            } else if (key === 'profileHeadline') {
+                return <Form.Group key={key}>
+                    <label htmlFor="profileHeadline">Headline:</label><br />
+                    <textarea type="text" id="profileHeadline" name="profileHeadline" rows="4" cols="50" value={profile.profileHeadline} onChange={handleChange} /><br />
+                </Form.Group>
+            }
+
+            return <Form.Group key={key}>
+                <Form.Label>{formatName(key)}</Form.Label>
+                <Form.Control
+                    id={key}
+                    name={key}
+                    text='text'
+                    placeholder={formatName(key)}
+                    value={profile[key]}
+                    onChange={handleChange}
+                />
+            </Form.Group>
+        });
+    }
+
+    const formatName = field => {
+        // need to change implementation
+        let newName = field.replace('_', ' ');
+        newName = field[0].toUpperCase() + newName.slice(1);
+        return newName;
+    };
+
     return (
-      <form className="header-form" onSubmit={formSubmit}>
-        <label htmlFor="profileImageURL">Profile Image:</label>
-        <br />
-        <input
-          onChange={handleChange}
-          type="text"
-          id="profileImageURL"
-          name="profileImageURL"
-          value={overview.profileImageURL}
-        />
-        <br />
-        <label htmlFor="firstName">First name:</label>
-        <br />
-        <input
-          onChange={handleChange}
-          type="text"
-          id="firstName"
-          name="firstName"
-          value={overview.firstName}
-        />
-        <br />
-        <label htmlFor="lastName">Last name:</label>
-        <br />
-        <input
-          onChange={handleChange}
-          type="text"
-          id="lastName"
-          name="lastName"
-          value={overview.lastName}
-        />
-        <br />
-        <label htmlFor="pronouns">Pronouns:</label>
-        <br />
-        <input
-          onChange={handleChange}
-          type="text"
-          id="pronouns"
-          name="pronouns"
-          value={overview.pronouns}
-        />
-        <br />
-        <label htmlFor="tagline">Tagline:</label>
-        <br />
-        <input
-          onChange={handleChange}
-          type="text"
-          id="tagline"
-          name="tagline"
-          value={overview.tagline}
-        />
-        <br />
+        <Form onSubmit={e => handleSubmit(e)}>
 
-        <label htmlFor="linkedInURL">LinkedIn:</label>
-        <br />
-        <input
-          onChange={handleChange}
-          type="text"
-          id="linkedInURL"
-          name="linkedInURL"
-          value={overview.linkedInURL}
-        />
-        <br />
-        <label htmlFor="githubURL">Github:</label>
-        <br />
-        <input
-          onChange={handleChange}
-          type="text"
-          id="githubURL"
-          name="githubURL"
-          value={overview.githubURL}
-        />
-        <br />
-        <label htmlFor="profileVideoURL">Youtube:</label>
-        <br />
-        <input
-          onChange={handleChange}
-          type="text"
-          id="profileVideoURL"
-          name="profileVideoURL"
-          value={overview.profileVideoURL}
-        />
-        <br />
+            {formFields()}
 
-        <label htmlFor="overview">Profile Headline:</label>
-        <br />
-        <textarea
-          type="text"
-          onChange={handleChange}
-          id="profileHeadline"
-          name="profileHeadline"
-          rows="4"
-          cols="50"
-          value={overview.profileHeadline}
-        ></textarea>
-        <br />
-
-        <label htmlFor="nationality">Nationality:</label>
-        <br />
-        <select
-          onChange={handleChange}
-          value={overview.nationality}
-          name="nationality"
-          id="nationality"
-        >
-          <option value="england">England</option>
-          <option value="scotland">Scotland</option>
-          <option value="wales">Wales</option>
-        </select>
-        <br />
-
-        <input type="submit" value="Submit" />
-        {error && <div className="error">{error}</div>}
-      </form>
-    );
+            {/* <Button
+                    variant='primary'
+                    type='submit'
+                    onClick={e => handleSubmit(e)}
+                >Update</Button> */}
+            <input type="submit" value="Submit" />
+        </Form>
+    )
 }
 
-export default Header
+export default HeaderForm;
