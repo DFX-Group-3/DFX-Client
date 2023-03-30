@@ -21,11 +21,9 @@ export default function ProfileOverview(details) {
                 
                 'Authorization' : `Bearer ${user.token}`
                 }
-            })
-        setPerson(response.data[0])
-        
-
-          
+        })
+          //Dont forget to make back to response.data[0]
+        setPerson(``)     
    }
    
    getPerson();

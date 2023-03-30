@@ -74,14 +74,14 @@ export default function Experience(props) {
             </div>
           </div>
           <h3>View the experience of the engineer</h3>
-
-          {popupForm && (
-            <div className="popup">
-              {/* <div className="row exp-col-row">
+                <div className="row exp-col-row">
                 <div className="col-4">ORGANIZATION</div>
                 <div className="col-3">POSITION</div>
                 <div className="col-4">DATES</div>
-              </div> */}
+              </div> 
+          {popupForm && (
+            <div className="popup">
+              
 
               <form className="header-form" onSubmit={formSubmit}>
                 <div className="col-4">

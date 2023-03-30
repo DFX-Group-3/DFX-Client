@@ -3,52 +3,58 @@ import axios from "axios";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import QualificationItem from "./QualificationItem";
+import { useUserContext } from "../../../hooks/UseUserContext";
 
 export default function Qualification() {
-  const [qualificationItems, setQualificationItems] = useState([]);
-  const [date, setDate] = useState(new Date());
+  const { user } = useUserContext()
+  
+  const [fromDate, setFromDate] = useState(new Date());
+  const [toDate, setToDate] = useState(new Date());
   const [popupForm, setpopupForm] = useState(false);
-  const [qualificationData, setqualificationData] = useState({
-    imageUrl: "",
-    subjectname: "",
-    grade: "",
-    description: "",
-    from: "",
-    to: "",
-    institution: "",
-    type: "",
-    qualificationlevel: "",
-    priority: "",
+  const [qualificationItem, setQualificationItem] = useState({
+    imageURL:``,
+    grade:``,
+    subjectName:``,
+    institutionName:``,
+    description:``,
+    from:``,
+    to:``,
+    type:``,
+    weight:``,
+    qualificationLevel:``,
+    priority:``
   });
-  const handleChange = (event) => {
-    setqualificationData({
-      ...qualificationData,
-      [event.target.name]: event.target.value,
+  function handleChange(event) {
+    const { name, value } = event.target
+    setQualificationItem({
+      ...qualificationItem,
+      [name]: value
     });
-  };
+    // console.log(qualificationItem)
+  }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    // try {
-    //   const res = await axios.post("/api/qualification", qualificationData);
-    //   console.log(res.data);
-    //   setpopupForm(false);
-    // } catch (error) {
-    //   console.error(error);
-    // }
-  };
+const formSubmit = async (e) => {
+    e.preventDefault()
 
-  useEffect(() => {
-    async function fetchData() {
-      // try {
-      //   const response = await axios.get("/api/qualification");
-      //   setQualificationItems(response.data);
-      // } catch (error) {
-      //   console.error(error);
-      // }
-    }
-    fetchData();
-  }, []);
+    await axios.post(`http://localhost:9000/qualification`, qualificationItem, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      }
+    }).then(res => {
+      console.log(res)
+      window.location.reload();
+      setpopupForm(false);
+
+    }).catch(function (error) {
+      if (error.response) {
+        console.log(error)
+       
+
+      }
+    })
+  }
+
   return (
     <div className="border-col">
       <div className="title-bts">
@@ -64,48 +70,51 @@ export default function Qualification() {
         </div>
       {popupForm && (
       <div className="popup">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="image">Image URL</label>
-          <input type="text" id="image" name="image" onChange={handleChange} />
-          <label htmlFor="suject">Subject name</label>
-          <input type="text" id="subject" name="subject"onChange={handleChange}/>
+        <form onSubmit={formSubmit}>
+          <label htmlFor="imageURL">Image URL</label>
+              <input type="text" id="imageURL" name="imageURL" onChange={handleChange} value={qualificationItem.imageURL } />
+          <label htmlFor="subjectName">Subject name</label>
+          <input type="text" id="subjectName" name="subjectName"onChange={handleChange} value={qualificationItem.subjectName }/>
           <label htmlFor="grade">Grade</label>
-          <input type="text" id="grade" name="grade" onChange={handleChange}/>
+          <input type="text" id="grade" name="grade" onChange={handleChange} value={qualificationItem.grade }/>
           <label htmlFor="description">Description</label>
-          <input type="text" id="description" name="description" onChange={handleChange}/>
-          <label htmlFor="startdate">From</label>
-          <DatePicker dateFormat="dd/MM/yyyy"selected={date} onChange={(date) => setDate(date)}/>
-          <label htmlFor="enddate">To</label>
-          <DatePicker dateFormat="dd/MM/yyyy"selected={date} onChange={(date) => setDate(date)}/>
-          <label htmlFor="instituion">Institution name</label>
-          <input type="text" id="institution" name="institution"onChange={handleChange}/>
-          <label>Type</label>
-          <select onChange={handleChange}>
+              <input type="text" id="description" name="description" onChange={handleChange} value={qualificationItem.description} />
+              <label htmlFor="weight">Weight</label>
+          <input type="text" id="weight" name="weight" onChange={handleChange} value={qualificationItem.weight }/>
+              <label htmlFor="from">From</label>
+              <input type="date" name="from" value={qualificationItem.from} onChange={handleChange}/>
+          {/* <DatePicker dateFormat="dd/MM/yyyy"selected={fromDate} name="from" onChange={(fromDate) => setFromDate(fromDate)}/> */}
+              <label htmlFor="to">To</label>
+              <input type="date" name="to" value={qualificationItem.to} onChange={handleChange}/>
+          {/* <DatePicker dateFormat="dd/MM/yyyy"selected={toDate} name="to" onChange={(toDate) => setToDate(toDate)} /> */}
+          <label htmlFor="institutionName">Institution name</label>
+          <input type="text" id="institutionName" name="institutionName" onChange={handleChange} value={qualificationItem.institutionName }/>
+          <label htmlFor="type">Type</label>
+          <select onChange={handleChange} name="type" value={qualificationItem.type }>
                     <option value="">Select an option</option>
-                    <option value="option">A level</option>
-                    <option value="option">Degree</option></select>
-          <label>Qualification level</label>
-          <select onChange={handleChange}> 
+                    <option value="A level">A level</option>
+                    <option value="Degree">Degree</option></select>
+          <label htmlFor="qualificationLevel">Qualification level</label>
+          <select onChange={handleChange} name="qualificationLevel" value={qualificationItem.qualificationLevel }> 
                     <option value="">Select an option</option>     
-                    <option value="option">Bachelors</option>
-                    <option value="option">Masters</option>
-                    <option value="option">PhD</option>
-                    <option value="option">IB</option></select>
-          <label>Priority</label>
-          <select onChange={handleChange}> 
+                    <option value="Bachelors">Bachelors</option>
+                    <option value="Masters">Masters</option>
+                    <option value="PhD">PhD</option>
+                    <option value="IB">IB</option></select>
+          <label htmlFor="priority">Priority</label>
+          <select onChange={handleChange} name="priority" value={qualificationItem.priority }> 
                     <option value="">Select an option</option>     
-                    <option value="option">1</option>
-                    <option value="option">2</option>
-                    <option value="option">3</option></select>
-          <button onClick={() => setpopupForm(false)}>Submit</button>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option></select>
+          <input type="submit" value="Submit" />
         </form>
       </div>
         )}
         
       </div>
       <QualificationItem />
-      <QualificationItem />
-      <QualificationItem/>
+      
     </div>
   );
 }
