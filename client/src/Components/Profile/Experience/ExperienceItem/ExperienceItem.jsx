@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useUserContext } from '../../../../hooks/UseUserContext'
 
 
-export default function ExperienceItem(props) {
+export default function ExperienceItem() {
   const [showExpand, setShowExpand] = useState(false)
   // const { imageURL, organization, priority, position, description, startDate, endDate } = props.experience.experience
 
@@ -25,6 +25,9 @@ export default function ExperienceItem(props) {
     }
     getExperience();
   }, [])
+
+
+
   const {
     imageURL,
     organization,
