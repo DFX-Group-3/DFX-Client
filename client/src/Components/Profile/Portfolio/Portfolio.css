@@ -19,7 +19,7 @@ button>img{
     border-bottom: 1px solid rgb(206, 255, 251);
 }
 
-  .popup {
+  /* .popup {
     transform: translate(-50%, -50%);
     position:fixed;
     padding: 20px;
@@ -33,11 +33,45 @@ button>img{
     top:50%;
     z-index: 999;
     background-color: white;
-  }
-  
-  .popup form {
+  } */
+.portfolio-submit-btn{
+    margin-top:24px;
+}
+.portfolio-items{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin:10px;
+    margin-left:50px;
+}
+.portfolio-items>div{
+    min-width:45%;
+    text-align: center;
+    display: flex;
+    background-color: rgba(160, 184, 204, 0.418);
+    border-radius:8px;
+    
+}
+.portfolio-items>div>img{
     display: flex;
     flex-direction: column;
-    gap: 10px;
-  }
-   
+    align-self: center;
+    margin:20px;
+}
+.portfolio-url-title{
+    font-size:12px;
+    padding:16px;
+    width:100%;
+    text-align: left;
+}
+.portfolio-url-title>h3{
+    font-size:1rem;
+}
+.item-url{
+    text-align: right;
+    
+}
+.item-url>a{
+    text-decoration: none;
+    font-weight: 700;
+}

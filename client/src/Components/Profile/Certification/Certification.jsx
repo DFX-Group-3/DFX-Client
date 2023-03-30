@@ -43,6 +43,7 @@ export default function Certification() {
               <img src='https://cdn-icons-png.flaticon.com/512/2311/2311991.png' />
               </button>
             {popupForm && (
+              <div className="form-overlay">
               <div className="popup">
                 <button className='close-form-button' onClick={()=>setpopupForm(false)}>X</button>
                 <form>
@@ -56,6 +57,7 @@ export default function Certification() {
                   </select>
                   <button onClick={() => setpopupForm(false)}>Submit</button>
                 </form>
+                </div>
               </div>)}
         </div>
         

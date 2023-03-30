@@ -37,7 +37,8 @@ const Header = () => {
                 }
         }).then(res => {
             console.log(res)
-            console.log(user._id)
+          console.log(user._id)
+          window.href.reload();
         }).catch(function(error){
                     if (error.response) {
                         console.log(error.response)

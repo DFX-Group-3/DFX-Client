@@ -73,31 +73,43 @@ export default function Portfolio(props) {
               <img src="https://cdn-icons-png.flaticon.com/512/2311/2311991.png" />
             </button>
             {popupForm && (
+              <div className="form-overlay">
               <div className="popup">
-                <form onSubmit={handleSubmit}>
+                <button className='close-form-button' onClick={()=>setpopupForm(false)}>X</button>
+                  <form onSubmit={handleSubmit}>
+                    <div className="row header-form-row">
+                      <div className="col-6">
                   <label htmlFor="image">Image URL</label>
-                  <input
+                        <input
+                          
                     type="text"
                     id="image"
                     name="imageURL"
                     onChange={handleChange}
                   />
                   <label htmlFor="description">Description</label>
-                  <input
+                        <input
+                          required
+                          minLength="20"
+                          maxLength="300"
                     type="text"
                     id="description"
                     name="description"
                     onChange={handleChange}
                   />
                   <label htmlFor="url">URL:</label>
-                  <input
+                        <input
+                          required
                     type="text"
                     id="url"
                     name="URL"
                     onChange={handleChange}
-                  />
+                        />
+                      </div>
+                      <div className="col-6">
                   <label htmlFor="url">Title</label>
-                  <input
+                        <input
+                          required
                     type="text"
                     id="title "
                     name="title"
@@ -105,16 +117,20 @@ export default function Portfolio(props) {
                   />
                   <label htmlFor="priority">Priority</label>
                   <input
-                    type="number"
+                          type="number"
+                          required
                     id="priority"
                     name="priority"
                     onChange={handleChange}
                   />
 
-                  <input type="submit" value="Submit" />
+                        <input className="portfolio-submit-btn" type="submit" value="Submit" />
+                        </div>
+                      </div>
                   {/* <button onClick={() => setpopupForm(false)}>Submit</button> */}
                 </form>
-              </div>
+                </div>
+                </div>
             )}
           </div>
         </div>
