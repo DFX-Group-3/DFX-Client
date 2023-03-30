@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
 import useLogin from '../hooks/UseLogin';
-
+import "./Login.css"
 
 const Login = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const {login,error,isLoading} = useLogin()
+  const { login, error, isLoading } = useLogin();
 
    
     const submitHandler = async (e) => {
@@ -16,18 +14,25 @@ const Login = () => {
     }
 
   return (
-    <div className='login'>
-          <form onSubmit={submitHandler}>
-              <label htmlFor="email">Email:</label>
+    <div className='login-container'>
+
+    
+      <div className='login'>
+        <h1>Login</h1>
+          <form className='login-form' onSubmit={submitHandler}>
+              
               <input type="email" placeholder='Email'value={email} onChange={(e)=> setEmail(e.target.value)}/>
 
-              <label htmlFor="password">Password:</label>
+              
               <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
-
-              <input type="submit" value='login' disabled={isLoading} />
+          <div className='login-submit-div'>
+            <input type="submit" value='login' disabled={isLoading} />
+              </div>
+              
               {error && <div className="error">{error}</div>}
           </form> 
-    </div>
+      </div>
+      </div>
   )
 }
 

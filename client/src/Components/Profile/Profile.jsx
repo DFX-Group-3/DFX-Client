@@ -24,12 +24,15 @@ export default function Profile() {
     };
 
     useEffect(() => {
-
-        const fetchUserExperienceData = async () => {
-            const experienceData = await retrieveUserExperience();
-            setExperience(experienceData.data)
-        }
-        fetchUserData();
+        // const fetchUserData = async () => {
+        //     const data = await retrieveUser();
+        //     setDetails(data.data);
+        // };
+        // const fetchUserExperienceData = async () => {
+        //     const experienceData = await retrieveUserExperience();
+        //     setExperience(experienceData.data)
+        // }
+        // fetchUserData();
         // fetchUserExperienceData();
     }, []);
 
