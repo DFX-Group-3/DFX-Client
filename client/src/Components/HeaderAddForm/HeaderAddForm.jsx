@@ -2,28 +2,34 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-const user_id = 1;
+import { useUserContext } from '../../hooks/UseUserContext';
 
 const Header = () => {
 
-    // all in 1
+    const { user } = useUserContext();
     const [profile, setProfile] = useState({
         firstName: '',
         lastName: '',
-        nationality: 'england',
-        linkedInUrl: '',
+        nationality: '',
+        linkedInURL: '',
         pronouns: '',
-        githubUrl: '',
+        githubURL: '',
         profileHeadline: '',
-        profileVideoUrl: '',
-        tagline: '',
-        user_id: undefined
+        profileVideoURL: '',
+        profileImageURL: '',
+        tagline: ''
     });
 
 
     const addProfile = async profile => {
         try {
-            const responseData = await axios.post(`http://localhost:4000/profile`, profile);
+            const responseData = await axios.post(`http://localhost:9000/profile`, profile, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
+            console.dir(responseData.data)
             return responseData.data;
         }
         catch (e) {
@@ -67,13 +73,11 @@ const Header = () => {
             ...profile,
             [e.target.name]: e.target.value
         });
-        console.log(profile);
     }
 
     // handle form data when being submit
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        profile.user_id = user_id;
         addProfile(profile);
     }
 

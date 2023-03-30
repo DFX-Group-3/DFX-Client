@@ -1,31 +1,26 @@
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
-import { retrieveUser } from '../../Utils/GetDetails';
-import { useUserContext } from '../../hooks/UseUserContext'; // temp probably
-const user_id = 2;
+import { useUserContext } from '../../hooks/UseUserContext';
 
 const HeaderEditForm = ({ overview }) => {
-    // test id is 12
-    //const userID = 1;
 
-    const { user } = useUserContext();
-    const [profile, setProfile] = useState(overview);
-
-    /**{
+    const emptyProfile = {
         firstName: '',
         lastName: '',
-        pronouns: '',
-        tagline: '',
-        linkedInUrl: '',
-        githubUrl: '',
-        profileVideoUrl: '',
-        profileHeadline: '',
         nationality: '',
-        user_id: undefined
-    } */
+        linkedInURL: '',
+        pronouns: '',
+        githubURL: '',
+        profileHeadline: '',
+        profileVideoURL: '',
+        profileImageURL: '',
+        tagline: ''
+    };
 
-    //const uri = `http://localhost:9000/profile/${user._id}`;
+    const { user } = useUserContext();
+    // const [profile, setProfile] = useState(overview);
+    const [profile, setProfile] = useState(emptyProfile);
 
     const editProfile = async profile => {
         try {
@@ -34,6 +29,22 @@ const HeaderEditForm = ({ overview }) => {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
+            return responseData.data;
+        }
+        catch (e) {
+            return { error: `Error` };
+        }
+    }
+
+    const addProfile = async profile => {
+        try {
+            const responseData = await axios.post(`http://localhost:9000/profile`, profile, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
+            console.dir(responseData.data)
             return responseData.data;
         }
         catch (e) {
@@ -52,13 +63,7 @@ const HeaderEditForm = ({ overview }) => {
         }
     }
 
-    // const fetchUserData = async () => {
-    //     const data = await retrieveUser(user);
-    //     setProfile(data.data[0]);
-    // };
-
     useEffect(() => {
-        //fetchUserData();
         getCountries();
     }, [])
 
@@ -77,30 +82,18 @@ const HeaderEditForm = ({ overview }) => {
         )
     })
 
-
-    // const getProfile = async () => {
-    //     const response = await axios.get(uri)
-    //     setProfile(response.data)
-    //     // console.log(response.data);
-    // }
-
-    // useEffect(() => {
-    //     getProfile();
-    //     console.log('Use effect called!');
-    // }, []);
-
     function handleChange(e) {
         setProfile({
             ...profile,
             [e.target.name]: e.target.value
         });
-        // console.log(profile)
     }
 
     // handle form data when being submit
     const handleSubmit = e => {
         e.preventDefault();
-        editProfile(profile);
+        // editProfile(profile);
+        addProfile(profile);
     }
 
     const formFields = () => {

@@ -3,7 +3,6 @@ import "./ProfileOverview.css"
 import HeaderForm from "../../HeaderForm/HeaderForm"
 import { useUserContext } from '../../../hooks/UseUserContext';
 import axios from 'axios';
-import HeaderAddForm from '../../HeaderAddForm/HeaderAddForm'
 import HeaderEditForm from '../../HeaderEditForm/HeaderEditForm';
 import { retrieveUser } from '../../../Utils/GetDetails.js'
 
@@ -53,9 +52,6 @@ export default function ProfileOverview() {
   //   profileVideoURL,
   //   tagline } = overview;
 
-  console.log(`overview in ProfileOverview: ${JSON.stringify(overview, null, 2)}`);
-  //console.log(`details in ProfileOverview: ${details}`);
-
   return (
     <>
       <div className='profile-div'>
@@ -80,7 +76,6 @@ export default function ProfileOverview() {
             <h2>{overview.firstName + " " + overview.lastName}</h2>
             <button className='mod-btn' onClick={() => setProfileForm(true)}>
               {profileForm && <HeaderEditForm overview={overview} />}
-              {/* {profileForm && <HeaderAddForm />} */}
               {/* {profileForm && <HeaderForm />} */}
               <img src='https://cdn-icons-png.flaticon.com/512/1159/1159633.png' />
             </button>
