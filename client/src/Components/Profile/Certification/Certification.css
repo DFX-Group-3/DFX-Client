@@ -45,3 +45,29 @@
   .items-flex-col-img>img{
 padding: 10px;
   }
+  .title-bts{
+    display: flex;
+    align-items: center;
+}
+.buttons{
+    margin: 0 0 0 auto;
+    
+}
+.buttons>button{
+    border: none;
+    background-color: transparent;
+}
+button>img{
+    width:25px;
+}
+.col-md-4{
+    display:flex;
+    border-bottom: 1px solid rgb(206, 255, 251);
+}
+  
+.popup form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+   

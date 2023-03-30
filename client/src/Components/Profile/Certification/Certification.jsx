@@ -1,11 +1,35 @@
-import React, { useState } from 'react'
+import { useState, useEffect} from 'react'
 import "./Certification.css"
 import CertificationItem from "./CertificationItem"
+import axios from 'axios'
 
 
 export default function Certification() {
   const [popupForm, setpopupForm]=useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
+  const [certificationData, setCertificationData] = useState({id:``,name:``,})
+
+  // const formSubmit = async (e) => {
+  //   e.preventDefault()
+
+  //   await axios.post(`http://localhost:9000/certification`, qualificationItem, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Bearer ${user.token}`
+  //     }
+  //   }).then(res => {
+  //     console.log(res)
+      
+  //     setpopupForm(false);
+
+  //   }).catch(function (error) {
+  //     if (error.response) {
+        
+  //       // setError(error.response.data.error)
+
+  //     }
+  //   })
+  // }
+
   return (
     <>
         <div className=' border-col'>
@@ -23,7 +47,7 @@ export default function Certification() {
                 <button className='close-form-button' onClick={()=>setpopupForm(false)}>X</button>
                 <form>
                   <label htmlFor="certification">Certifications</label>
-                  <select value={selectedValue} onChange={(e) => { setSelectedValue(e.target.value) }}>
+                  <select value={certificationData} onChange={(e) => { setCertificationData(e.target.value) }}>
                     <option value="">Select an option</option>
                     <option value="option">Oracle Java Certified Foundations Associate</option>
                     <option value="option">Java Explorer</option>
