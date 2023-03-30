@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./Portfolio.css";
 import PortfolioItem from "./PortfolioItem";
-import axios from "axios";
+import axios from "axios"
+import { useUserContext } from "../../../hooks/UseUserContext";
+///-------------------------------------------------------------------------
 
-export default function Portfolio() {
+export default function Portfolio(props) {
   const [portfolioItems, setPortfolioItems] = useState([]);
   const [popupForm, setpopupForm] = useState(false);
   const [portfolioData, setportfolioData] = useState({
-    imageUrl: "",
+    imageURL: "",
     description: "",
-    url: "",
+    URL: "",
     title: "",
     priority: "",
   });
   const [selectedItem, setSelectedItem] = useState(null);
+  const { user } = useUserContext()
 
 
   const handleChange = (event) => {
@@ -23,37 +26,38 @@ export default function Portfolio() {
     });
   };
 
+  // add new portfolio
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post("/api/portfolio", portfolioData);
+      const res = await axios.post("http://localhost:9000/portfolio", portfolioData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+
       console.log(res.data);
       setpopupForm(false);
+
     } catch (error) {
       console.error(error);
     }
   };
+
+  // delete portfolio
   const handleRemove = async () => {
     try {
-    await axios.delete(`/api/portfolio/${selectedItem.id}`);
-    setPortfolioItems(portfolioItems.filter((item) => item.id !== selectedItem.id));
-    setSelectedItem(null);
+      await axios.delete(`/api/portfolio/${selectedItem.id}`);
+      setPortfolioItems(portfolioItems.filter((item) => item.id !== selectedItem.id));
+      setSelectedItem(null);
     } catch (error) {
-    console.error(error);
+      console.error(error);
     }
-    };
+  };
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get("/api/portfolio");
-        setPortfolioItems(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchData();
-  }, []);
+
+
 
   return (
     <>
@@ -61,9 +65,10 @@ export default function Portfolio() {
         <div className="title-bts">
           <h2>Portfolio</h2>
           <div className="buttons">
-            <button>
+            <button >
               <img src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png" />
             </button>
+
             <button onClick={() => setpopupForm(true)}>
               <img src="https://cdn-icons-png.flaticon.com/512/2311/2311991.png" />
             </button>
@@ -74,7 +79,7 @@ export default function Portfolio() {
                   <input
                     type="text"
                     id="image"
-                    name="image"
+                    name="imageURL"
                     onChange={handleChange}
                   />
                   <label htmlFor="description">Description</label>
@@ -88,7 +93,7 @@ export default function Portfolio() {
                   <input
                     type="text"
                     id="url"
-                    name="url"
+                    name="URL"
                     onChange={handleChange}
                   />
                   <label htmlFor="url">Title</label>
@@ -105,23 +110,28 @@ export default function Portfolio() {
                     name="priority"
                     onChange={handleChange}
                   />
-                  <button onClick={() => setpopupForm(false)}>Submit</button>
+
+                  <input type="submit" value="Submit" />
+                  {/* <button onClick={() => setpopupForm(false)}>Submit</button> */}
                 </form>
               </div>
             )}
           </div>
         </div>
-        <div className="portfolio-items">
+        <PortfolioItem portfolio={props} />
+
+        {/* <div className="portfolio-items">
           {portfolioItems.map((item) => (
             <PortfolioItem
-              imageUrl={item.imageUrl}
-              description={item.description}
-              url={item.url}
-              priority={item.priority}
+            // imageURL={item.imageURL}
+            // description={item.description}
+            // URL={item.URL}
+            // title={item.title}
+            // priority={item.priority}
             />
           ))}
-        </div>
+        </div> */}
       </div>
     </>
   );
-}
+          }

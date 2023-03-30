@@ -71,7 +71,7 @@ export default function ProfileOverview() {
           </div>
 
         </div>
-      </div>
+      </div >
     </>
   )
 }
