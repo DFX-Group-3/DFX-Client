@@ -38,8 +38,8 @@ console.log(experience)
   const experiences = experience.map((exp) => {
     const { organization, position, startDate, endDate, description, imageURL } = exp;
     return (
-    <div>
-      <div key={position} className="row exp-item-row">
+    <div key={exp._id}>
+      <div  className="row exp-item-row">
         <div className="col-4 company-col">
           <div className='col-6'><img alt="lorem picsum" src={imageURL} /></div>
           <div className='col-5'>{organization}</div>
