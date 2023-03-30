@@ -5,7 +5,6 @@ import { useUserContext } from "../../../hooks/UseUserContext.js";
 import axios from 'axios'
 
 export default function Experience(props) {
-<<<<<<< HEAD
   const [experienceItems, setExperienceItems] = useState({
     imageURL: ``,
     organization: ``,
@@ -30,12 +29,12 @@ export default function Experience(props) {
       }
     }).then(res => {
       console.log(res)
-      console.log(user._id)
+      
       setpopupForm(false);
 
     }).catch(function (error) {
       if (error.response) {
-        console.log(error.response)
+        
         // setError(error.response.data.error)
 
       }
@@ -57,12 +56,6 @@ export default function Experience(props) {
   }
 
 
-=======
-
-  const [experienceItems, setExperienceItems] = useState([])
-  const [ popupForm, setPopupForm] = useState(false)
-
->>>>>>> b1dade9471ea11fc15112872d241c0fda81ec395
   return (
     <>
       <div className='border-col'>
@@ -73,14 +66,9 @@ export default function Experience(props) {
               <button>
                 <img src='https://cdn-icons-png.flaticon.com/512/1159/1159633.png' alt="a" />
               </button>
-<<<<<<< HEAD
 
               < button onClick={() => setpopupForm(true)}>
                 <img src='https://cdn-icons-png.flaticon.com/512/2311/2311991.png' alt="b" />
-=======
-            <button onClick={()=>setPopupForm(true)}>
-              <img src='https://cdn-icons-png.flaticon.com/512/2311/2311991.png' />
->>>>>>> b1dade9471ea11fc15112872d241c0fda81ec395
               </button>
 
             </div>

@@ -25,32 +25,32 @@ export default function Portfolio() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const res = await axios.post("/api/portfolio", portfolioData);
-      console.log(res.data);
-      setpopupForm(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const handleRemove = async () => {
-    try {
-    await axios.delete(`/api/portfolio/${selectedItem.id}`);
-    setPortfolioItems(portfolioItems.filter((item) => item.id !== selectedItem.id));
-    setSelectedItem(null);
-    } catch (error) {
-    console.error(error);
-    }
+  //   try {
+  //     const res = await axios.post("/api/portfolio", portfolioData);
+  //     console.log(res.data);
+  //     setpopupForm(false);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // const handleRemove = async () => {
+  //   try {
+  //   await axios.delete(`/api/portfolio/${selectedItem.id}`);
+  //   setPortfolioItems(portfolioItems.filter((item) => item.id !== selectedItem.id));
+  //   setSelectedItem(null);
+  //   } catch (error) {
+  //   console.error(error);
+  //   }
     };
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        const response = await axios.get("/api/portfolio");
-        setPortfolioItems(response.data);
-      } catch (error) {
-        console.error(error);
-      }
+      // try {
+      //   const response = await axios.get("/api/portfolio");
+      //   setPortfolioItems(response.data);
+      // } catch (error) {
+      //   console.error(error);
+      // }
     }
     fetchData();
   }, []);

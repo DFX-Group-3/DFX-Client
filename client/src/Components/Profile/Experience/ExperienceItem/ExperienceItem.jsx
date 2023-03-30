@@ -21,7 +21,7 @@ export default function ExperienceItem(props) {
           'Authorization': `Bearer ${user.token}`
         }
       })
-      setExperience(response.data[0])
+      setExperience(response.data)
     }
     getExperience();
   }, [])
@@ -34,16 +34,14 @@ export default function ExperienceItem(props) {
     startDate,
     endDate
   } = experience;
-
-  console.log(experience)
-
-  return (
+console.log(experience)
+  const experiences = experience.map((exp) => {
+    const { organization, position, startDate, endDate, description, imageURL } = exp;
+    return (
     <div>
-      <div className="row exp-item-row">
-
-
+      <div key={position} className="row exp-item-row">
         <div className="col-4 company-col">
-          <div className='col-6'><img alt="lorem picsum" src='https://picsum.photos/100/70' /></div>
+          <div className='col-6'><img alt="lorem picsum" src={imageURL} /></div>
           <div className='col-5'>{organization}</div>
 
         </div>
@@ -63,16 +61,21 @@ export default function ExperienceItem(props) {
 
             </div>
           </div>
-
-          <h4>position</h4>
-
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur excepturi laboriosam voluptatem quae. Error et repellat minima quisquam modi, animi debitis cumque nostrum. Deleniti accusantium autem non quae iure perspiciatis?
-            Odit aliquam deserunt illum molestiae autem dolor pariatur voluptatibus architecto eius laboriosam, molestias necessitatibus, minima sit facilis amet sint repudiandae? Nam ad dolorem fugit tempora fuga, earum pariatur saepe a?</p>
-          <p>Skills: {description}</p>
+            <p>{description}</p>
+            {/* needs fix in database, to have skills as well */}
+          <p>Skills: </p>
 
 
         </div>}
     </div>
+
+  )
+  })
+
+  return (
+    <>
+      {experiences}
+    </>
 
   )
 }

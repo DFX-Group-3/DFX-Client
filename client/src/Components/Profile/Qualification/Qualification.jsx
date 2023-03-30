@@ -29,23 +29,23 @@ export default function Qualification() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const res = await axios.post("/api/qualification", qualificationData);
-      console.log(res.data);
-      setpopupForm(false);
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   const res = await axios.post("/api/qualification", qualificationData);
+    //   console.log(res.data);
+    //   setpopupForm(false);
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        const response = await axios.get("/api/qualification");
-        setQualificationItems(response.data);
-      } catch (error) {
-        console.error(error);
-      }
+      // try {
+      //   const response = await axios.get("/api/qualification");
+      //   setQualificationItems(response.data);
+      // } catch (error) {
+      //   console.error(error);
+      // }
     }
     fetchData();
   }, []);
