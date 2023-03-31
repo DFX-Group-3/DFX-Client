@@ -29,9 +29,9 @@ export default function QualificationItem() {
 
 
     return (
-      < >
-        <div  key={qualification._id} className='row items-flex'>
-          <div className='col-2 items-flex-col-img'>
+      <div key={qualification._id}>
+        <div className='row items-flex'>
+          <div    className='col-2 items-flex-col-img'>
             <img src="https://picsum.photos/50/50" />
           </div>
           <div className='col-10 qualification-items-name'>
@@ -40,7 +40,7 @@ export default function QualificationItem() {
           </div>
         </div>
       
-      </>
+      </div>
     )
   
   })

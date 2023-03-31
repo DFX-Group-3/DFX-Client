@@ -32,8 +32,10 @@ export default function Languages() {
             <button onClick={()=>setpopupForm(true)}>
               <img alt='addButton' src='https://cdn-icons-png.flaticon.com/512/2311/2311991.png' />
               </button>
-            {popupForm && (
+          {popupForm && (
+            <div className="form-overlay">
               <div className="popup" >
+                <button className='close-form-button' onClick={()=>setpopupForm(false)}>X</button>
               <form onSubmit={handleSubmit}>
         <label htmlFor="certification">Languages</label>
         <select value={selectedValue} onChange={(e)=>{setSelectedValue(e.target.value)}}>Level
@@ -58,6 +60,7 @@ export default function Languages() {
          </select>
         <button onClick ={()=>setpopupForm(false)}>Submit</button>
               </form>
+              </div>
               </div>)}
             </div>
         </div>

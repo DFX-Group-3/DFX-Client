@@ -61,7 +61,7 @@ export default function Portfolio(props) {
 
   return (
     <>
-      <div className="border-col">
+      <div className="border-col portfolio-data-container">
         <div className="title-bts">
           <h2>Portfolio</h2>
           <div className="buttons">
