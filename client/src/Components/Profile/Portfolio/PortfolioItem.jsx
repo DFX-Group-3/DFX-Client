@@ -70,9 +70,14 @@ export default function PortfolioItem() {
       {portfolio.map((item) => (
         <div key={item._id}>
           <img src={item.imageUrl} alt={item.description} />
-          <p>{item.URL}</p>
-          <h3>{item.title}</h3>
-          <p>{item.priority}</p>
+          <div className="portfolio-url-title">
+          
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <div className="item-url">
+              <a href={item.URL}>Full Project</a>
+              </div>
+            </div>
         </div>
       ))}
     </div>

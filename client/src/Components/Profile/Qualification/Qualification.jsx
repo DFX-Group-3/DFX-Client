@@ -68,9 +68,13 @@ const formSubmit = async (e) => {
           <img src="https://cdn-icons-png.flaticon.com/512/2311/2311991.png" />
         </button>
         </div>
-      {popupForm && (
-      <div className="popup">
-        <form onSubmit={formSubmit}>
+        {popupForm && (
+          <div className="form-overlay">
+            <div className="popup">
+              <button className='close-form-button' onClick={()=>setpopupForm(false)}>X</button>
+              <form onSubmit={formSubmit}>
+                <div className='row header-form-row'>
+                <div className='col-4'> 
           <label htmlFor="imageURL">Image URL</label>
               <input type="text" id="imageURL" name="imageURL" onChange={handleChange} value={qualificationItem.imageURL } />
           <label htmlFor="subjectName">Subject name</label>
@@ -78,7 +82,9 @@ const formSubmit = async (e) => {
           <label htmlFor="grade">Grade</label>
           <input type="text" id="grade" name="grade" onChange={handleChange} value={qualificationItem.grade }/>
           <label htmlFor="description">Description</label>
-              <input type="text" id="description" name="description" onChange={handleChange} value={qualificationItem.description} />
+                    <input type="text" id="description" name="description" onChange={handleChange} value={qualificationItem.description} />
+                  </div>
+                  <div className="col-4">
               <label htmlFor="weight">Weight</label>
           <input type="text" id="weight" name="weight" onChange={handleChange} value={qualificationItem.weight }/>
               <label htmlFor="from">From</label>
@@ -88,7 +94,9 @@ const formSubmit = async (e) => {
               <input type="date" name="to" value={qualificationItem.to} onChange={handleChange}/>
           {/* <DatePicker dateFormat="dd/MM/yyyy"selected={toDate} name="to" onChange={(toDate) => setToDate(toDate)} /> */}
           <label htmlFor="institutionName">Institution name</label>
-          <input type="text" id="institutionName" name="institutionName" onChange={handleChange} value={qualificationItem.institutionName }/>
+                    <input type="text" id="institutionName" name="institutionName" onChange={handleChange} value={qualificationItem.institutionName} />
+                  </div>
+                  <div className="col-4">
           <label htmlFor="type">Type</label>
           <select onChange={handleChange} name="type" value={qualificationItem.type }>
                     <option value="">Select an option</option>
@@ -107,9 +115,12 @@ const formSubmit = async (e) => {
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option></select>
-          <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" />
+                    </div>
+                    </div>
         </form>
       </div>
+            </div>
         )}
         
       </div>

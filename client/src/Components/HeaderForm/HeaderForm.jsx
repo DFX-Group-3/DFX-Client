@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import { useUserContext } from '../../hooks/UseUserContext';
-
+import "./HeaderForm.css"
 const HeaderForm = ({ overview }) => {
-
+    const navigate = useNavigate();
     const emptyProfile = {
         firstName: '',
         lastName: '',
@@ -29,6 +30,7 @@ const HeaderForm = ({ overview }) => {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
+            navigate("/")
             return responseData.data;
         }
         catch (e) {
@@ -44,7 +46,8 @@ const HeaderForm = ({ overview }) => {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
-            console.dir(responseData.data)
+            // console.dir(responseData.data)
+            navigate("/")
             return responseData.data;
         }
         catch (e) {
@@ -142,8 +145,12 @@ const HeaderForm = ({ overview }) => {
     };
 
     return (
+        <div className="form-overlay">
         <div className="popup">
-            <Form onSubmit={e => handleSubmit(e)}>
+           
+
+            
+            <Form className='header-form' onSubmit={e => handleSubmit(e)}>
 
                 {formFields()}
 
@@ -153,7 +160,8 @@ const HeaderForm = ({ overview }) => {
                         onClick={e => handleSubmit(e)}
                     >Update</Button> */}
                 <input type="submit" value="Submit" />
-            </Form>
+                </Form>
+             </div>   
         </div>
     )
 }

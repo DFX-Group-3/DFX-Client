@@ -80,60 +80,47 @@ export default function Experience(props) {
                 <div className="col-4">DATES</div>
               </div> 
           {popupForm && (
-            <div className="popup">
-              
-
-              <form className="header-form" onSubmit={formSubmit}>
-                <div className="col-4">
-                  <label htmlFor="imageURL">Image Url:</label><br />
-                  <input type="text" id="imageURL" name="imageURL" value={experienceItems.imageURL} onChange={handleChange} /><br />
-                </div>
-
-                <div className="col-3">
-                  <label htmlFor="organization">ORGANIZATION:</label><br />
-                  <input type="text" id="organization" name="organization" value={experienceItems.organization} onChange={handleChange} /><br />
-                </div>
-
-                <div className="col-4">
-                  <label htmlFor="priority">priority</label>
-                  <select name="priority" value={experienceItems.priority} onChange={handleChange}>
+          <div className="form-overlay">
+              <div className="popup">
+                <button className='close-form-button' onClick={()=>setpopupForm(false)}>X</button>
+            <form onSubmit={formSubmit}>
+              <div className='row header-form-row'>
+                <div className='col-6'> 
+                <label htmlFor="imageURL">Image Url</label>
+                  <input required type="text" id="imageURL" name="imageURL" value={experienceItems.imageURL} onChange={handleChange} /><br />
+                <label htmlFor="organization">Organization</label>
+                  <input required type="text" id="organization" name="organization" value={experienceItems.organization} onChange={handleChange} /><br />
+                <label htmlFor="priority">Priority</label>
+                  <select required name="priority" value={experienceItems.priority} onChange={handleChange}>
                     <option value="">Select an option</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="10">10</option>
-                  </select>
-                </div>
-
-                <div className="col-4">
-                  <label htmlFor="position">Position:</label><br />
-                  <input type="text" id="position" name="position" value={experienceItems.position} onChange={handleChange} /><br />
-                </div>
-
-                <div className="col-4">
-                  <label htmlFor="description">Description:</label><br />
-                  <input type="text" id="description" name="description" value={experienceItems.description} onChange={handleChange} /><br />
-                </div>
-
-                <div className="col-4">
-                  <label htmlFor="startDate">Start Date:</label><br />
-                  <input type="date" id="startDate" name="startDate" value={experienceItems.startDate} onChange={handleChange} /><br />
-                </div>
-
-                <div className="col-4">
-                  <label htmlFor="endDate">End Date:</label><br />
-                  <input type="date" id="endDate" name="endDate" value={experienceItems.endDate} onChange={handleChange} /><br />
-                </div>
-
+                      </select><br/>
+                    
+                <label htmlFor="position">Position</label>
+                      <input required type="text" id="position" name="position" value={experienceItems.position} onChange={handleChange} /><br />
+                      </div>
+                  <div className='col-6'> 
+                <label htmlFor="description">Description</label>
+                  <input required type="text" id="description" name="description" value={experienceItems.description} onChange={handleChange} /><br />
+                <label htmlFor="startDate">Start Date</label>
+                  <input required type="date" id="startDate" name="startDate" value={experienceItems.startDate} onChange={handleChange} /><br />
+                <label htmlFor="endDate">End Date</label>
+                  <input required type="date" id="endDate" name="endDate" value={experienceItems.endDate} onChange={handleChange} /><br />
                 <input type="submit" value="Submit" />
-
+                    </div>
+                </div>    
                 {/* <input type="button" value="close" onClick={() => setpopupForm(false)} /> */}
-              </form>
-            </div>
+                </form>
+                </div>
+          </div>
           )}
 
           <ExperienceItem experience={props} />
         </div>
       </div>
+      
 
     </>
   )
