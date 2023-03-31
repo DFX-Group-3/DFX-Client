@@ -43,7 +43,7 @@ export default function Profile() {
                 <ProfileOverview details={details} />
                 <div className="row gx-1 container-row">
                     {/**Column for the left side (portfolio, experience etc) */}
-                    <div className="col-8 ">
+                    <div className="col-xxl-8 col-md-12 ">
                         {/**That is 1 part (experience) until the next comment */}
                         <Experience experience={experience} />
                         {/**Next part starts here */}
@@ -51,7 +51,7 @@ export default function Profile() {
 
                     </div>
                     {/**The column for the right side(qualification, certification etc) */}
-                    <div className="col-3 r-col">
+                    <div className="col-xxl-3 col-md-12 r-col">
                         {/**Certification part of right column */}
                         <Certification />
                         <Qualification />
